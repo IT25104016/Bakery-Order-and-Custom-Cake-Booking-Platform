@@ -47,7 +47,6 @@ public class AdminController {
         model.addAttribute("totalUsers", userService.countCustomers());
         model.addAttribute("totalRevenue", orderService.totalRevenue());
         model.addAttribute("pendingOrders", orderService.pendingOrders());
-        model.addAttribute("topSellingItems", orderService.topSellingItems(5));
         model.addAttribute("lowStockItems", productService.getAllLowStock());
         model.addAttribute("lowStockCount", productService.getAllLowStock().size());
         model.addAttribute("currentUser",
@@ -58,77 +57,18 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String viewUsers(@AuthenticationPrincipal UserDetails userDetails,
-                            Model model) {
-        User currentUser = userService.findByEmail(userDetails.getUsername())
-                .orElse(null);
-
+    public String viewUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("currentAdminIsMain", userService.isMainAdmin(currentUser));
-        model.addAttribute("mainAdminId", UserService.MAIN_ADMIN_ID);
-        model.addAttribute("mainAdminEmail", UserService.MAIN_ADMIN_EMAIL);
         return "admin/users";
     }
 
-
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(
-
-            @AuthenticationPrincipal UserDetails userDetails,
-
-            @PathVariable int id,
-
-            RedirectAttributes redirectAttributes
-
-    ) {
-
-        try {
-
-            User user =
-                    userService.findById(id)
-                            .orElseThrow(() -> new IllegalStateException("User not found."));
-
-            User currentUser =
-                    userService.findByEmail(userDetails.getUsername())
-                            .orElseThrow(() -> new IllegalStateException("Current admin account not found."));
-
-            if (!userService.canDeleteUser(currentUser, user)) {
-
-                redirectAttributes.addFlashAttribute(
-
-                        "error",
-
-                        getDeleteDeniedMessage(currentUser, user)
-                );
-
-                return "redirect:/admin/users";
-            }
-
-            userService.deleteUser(id);
-
-            redirectAttributes.addFlashAttribute(
-
-                    "success",
-
-                    "User deleted successfully!"
-            );
-
-        }
-
-        catch (IllegalStateException e) {
-
-            redirectAttributes.addFlashAttribute(
-
-                    "error",
-
-                    e.getMessage()
-            );
-        }
-
+    public String deleteUser(@PathVariable int id,
+                             RedirectAttributes redirectAttributes) {
+        userService.deleteUser(id);
+        redirectAttributes.addFlashAttribute("success", "User deleted successfully!");
         return "redirect:/admin/users";
     }
-
-
 
     @GetMapping("/products")
     public String viewProducts(@RequestParam(required = false) String search,
@@ -303,21 +243,5 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("error", "Image upload failed. Please try again.");
             return null;
         }
-    }
-
-    private String getDeleteDeniedMessage(User currentUser, User targetUser) {
-        if (currentUser.getId() == targetUser.getId()) {
-            return "You cannot delete your own account.";
-        }
-
-        if (userService.isMainAdmin(targetUser)) {
-            return "Main admin cannot be deleted.";
-        }
-
-        if ("ADMIN".equals(targetUser.getRole())) {
-            return "Only the main admin can delete other admins.";
-        }
-
-        return "You are not allowed to delete this user.";
     }
 }
