@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <span style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;">
+        <img th:src="@{/images/logo.png}" width="36" alt="logo" style="border-radius:50%;border:2px solid #F0C878;">
+        MC Bakers Admin
+    </span>
+    <button class="hamburger" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="navLinks">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/products}">Products</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/admin/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+    </div>
+    <div class="form-card">
+        <h2>Add Product</h2>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <form th:action="@{/admin/product/add}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" required placeholder="Product name">
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="price" min="0" step="0.01" required placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" min="0" required placeholder="0">
+            </div>
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select name="category"
+                        required>
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Cakes">
+                        Cakes
+                    </option>
+
+                    <option value="Cupcakes">
+                        Cupcakes
+                    </option>
+
+                    <option value="Buns">
+                        Buns
+                    </option>
+
+                    <option value="Pastries">
+                        Pastries
+                    </option>
+
+                    <option value="Burgers">
+                    Burgers
+                    </option>
+
+                    <option value="Cookies">
+                        Cookies
+                    </option>
+
+                    <option value="Donuts">
+                        Donuts
+                    </option>
+
+                    <option value="Beverages">
+                        Beverages
+                    </option>
+
+
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="imageFile" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Product</button>
+        </form>
+    </div>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

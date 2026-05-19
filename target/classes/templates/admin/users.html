@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>All Users - Admin</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body>
+<nav class="navbar">
+  <span style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;">
+    <img th:src="@{/images/logo.png}" width="36" alt="logo" style="border-radius:50%;border:2px solid #F0C878;">
+    MC Bakers Admin
+  </span>
+  <button class="hamburger" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="navbar-links" id="navLinks">
+    <a th:href="@{/admin/dashboard}">Dashboard</a> <a th:href="@{/logout}">Logout</a>
+  </div>
+</nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/admin/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+    </div>
+    <div class="page-header-actions">
+        <h2>All Users</h2>
+    </div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <table class="table">
+        <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.name}"></td>
+                <td th:text="${u.email}"></td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${u.role == 'ADMIN'} ? 'badge-ready' : 'badge-pending'"
+                          th:text="${u.role}"></span>
+                </td>
+
+                <td>
+                    <span th:if="${u.email == #authentication.name}"
+                          class="badge badge-ready">
+                        Current User
+                    </span>
+
+                    <span th:if="${u.id == mainAdminId
+                                  and u.email == mainAdminEmail
+                                  and u.email != #authentication.name}"
+                          class="badge badge-ready">
+                        Main Admin
+                    </span>
+
+                    <span th:if="${u.role == 'ADMIN'
+                                  and not currentAdminIsMain
+                                  and not (u.id == mainAdminId and u.email == mainAdminEmail)
+                                  and u.email != #authentication.name}"
+                          class="badge badge-ready">
+                        Protected
+                    </span>
+
+                    <a th:if="${u.role == 'ADMIN'
+                               and currentAdminIsMain
+                               and not (u.id == mainAdminId and u.email == mainAdminEmail)
+                               and u.email != #authentication.name}"
+                       th:href="@{/admin/user/delete/{id}(id=${u.id})}"
+                       class="btn btn-danger"
+                       onclick="return confirm('Delete this admin?')">
+                        Delete
+                    </a>
+
+                    <a th:if="${u.role != 'ADMIN'
+                               and u.email != #authentication.name}"
+                       th:href="@{/admin/user/delete/{id}(id=${u.id})}"
+                       class="btn btn-danger"
+                       onclick="return confirm('Delete this user?')">
+                        Delete
+                    </a>
+                </td>
+
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

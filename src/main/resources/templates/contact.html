@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Contact - MC Bakers
+    </title>
+
+    <link rel="icon"
+          type="image/png"
+          th:href="@{/images/logo.png}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <span class="navbar-brand">
+
+        <img th:src="@{/images/logo.png}"
+             width="36"
+             alt="logo">
+
+        MC Bakers
+
+    </span>
+
+</nav>
+
+<!-- CONTENT -->
+
+<div class="container"
+     style="
+     padding:60px 20px;
+     max-width:800px;
+     margin:auto;
+">
+
+    <div class="form-card"
+         style="
+         padding:40px;
+         text-align:center;
+">
+
+        <h2>
+            Contact Us
+        </h2>
+
+        <p style="margin-top:20px;">
+
+            📍 Kurunegala Road,
+            Sri Lanka
+
+        </p>
+
+        <p>
+
+            📞 +94 77 123 4567
+
+        </p>
+
+        <p>
+
+            ✉ mcbakers@gmail.com
+
+        </p>
+
+        <a th:href="@{/customer/products}"
+           class="btn btn-primary"
+           style="margin-top:24px;">
+
+            Back to Products
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

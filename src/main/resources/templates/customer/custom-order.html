@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Cake Order - MC Bakers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .price-display { background:#fff8f0; border:2px solid #8B4513; border-radius:12px; padding:20px; text-align:center; margin:20px 0; }
+        .price-display .amount { font-size:2rem; font-weight:700; color:#8B4513; }
+        .size-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:8px; }
+        .size-card { border:2px solid #ddd; border-radius:10px; padding:14px; text-align:center; cursor:pointer; transition:all 0.2s; }
+        .size-card:hover, .size-card.selected { border-color:#8B4513; background:#fff8f0; }
+        .size-card input[type=radio] { display:none; }
+        .size-card .icon  {
+            width:42px; height:42px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            margin:0 auto; background:var(--brown-pale);
+            color:var(--brown-main); font-weight:700;
+            font-family:'Playfair Display',serif; font-size:1.1rem;
+        }
+        .size-card .label { font-weight:600; font-size:13px; margin-top:6px; }
+        .size-card .price { color:#8B4513; font-size:12px; }
+        .flavor-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:8px; }
+        .flavor-btn { border:2px solid #ddd; border-radius:8px; padding:10px; text-align:center; cursor:pointer; font-size:13px; font-weight:600; background:white; transition:all 0.2s; }
+        .flavor-btn:hover, .flavor-btn.selected { border-color:#8B4513; background:#fff8f0; color:#8B4513; }
+        .flavor-btn input[type=radio] { display:none; }
+        .order-form-card { background:white; border-radius:16px; padding:36px; max-width:680px; margin:0 auto; box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+        .section-title { font-size:14px; font-weight:700; color:#555; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; padding-bottom:6px; border-bottom:2px solid #f0f0f0; }
+        .section-title { display:flex; align-items:center; gap:8px; }
+        .section-title svg, .title-with-icon svg, .submit-icon { width:18px; height:18px; color:var(--brown-main); flex-shrink:0; }
+        .title-with-icon { display:flex; align-items:center; gap:8px; }
+        .form-section { margin-bottom:28px; }
+        textarea { width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px; font-family:inherit; resize:vertical; outline:none; }
+        textarea:focus { border-color:#8B4513; }
+    </style>
+</head>
+<body>
+<nav th:replace="~{fragments/customer-navbar :: navbar}"></nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/customer/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+    </div>
+    <h2 class="title-with-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14v8H5z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12c0-2.2 3.1-4 7-4s7 1.8 7 4"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 8V5M12 8V5M16 8V5"/>
+        </svg>
+        Custom Cake Order
+    </h2>
+    <p style="color:#666; margin-bottom:24px;">Design your perfect cake - we'll bake it just for you!</p>
+    <div class="order-form-card">
+        <form th:action="@{/customer/custom-order}" method="post" id="customOrderForm">
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 17h16M6 17V7h12v10M9 7V4h6v3"/>
+                    </svg>
+                    Cake Size
+                </div>
+                <div class="size-cards">
+                    <label class="size-card" onclick="selectSize(this, 1200)">
+                        <input type="radio" name="size" value="Small" required>
+                        <div class="icon">S</div>
+                        <div class="label">Small</div>
+                        <div class="price">500g - Rs. 1,200</div>
+                    </label>
+                    <label class="size-card" onclick="selectSize(this, 2200)">
+                        <input type="radio" name="size" value="Medium">
+                        <div class="icon">M</div>
+                        <div class="label">Medium</div>
+                        <div class="price">1kg - Rs. 2,200</div>
+                    </label>
+                    <label class="size-card" onclick="selectSize(this, 3500)">
+                        <input type="radio" name="size" value="Large">
+                        <div class="icon">L</div>
+                        <div class="label">Large</div>
+                        <div class="price">2kg - Rs. 3,500</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12c0-4 3-7 6-7s6 3 6 7-3 7-6 7-6-3-6-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 9h.01M15 10h.01M11 15h.01"/>
+                    </svg>
+                    Cake Flavor
+                </div>
+                <div class="flavor-grid">
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="Chocolate" required>Chocolate</label>
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="Vanilla">Vanilla</label>
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="RedVelvet">Red Velvet</label>
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="Strawberry">Strawberry</label>
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="Caramel">Caramel</label>
+                    <label class="flavor-btn" onclick="selectFlavor(this)"><input type="radio" name="flavor" value="BlackForest">Black Forest</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 20h4l10-10a2.8 2.8 0 0 0-4-4L4 16v4z"/>
+                    </svg>
+                    Cake Message
+                </div>
+                <div class="form-group">
+                    <input type="text" name="customMessage" maxlength="200" placeholder="e.g. Happy Birthday Sarah! (optional)">
+                    <small>Text to write on the cake (max 200 characters)</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 3v4M17 3v4M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Delivery Date
+                </div>
+                <div class="form-group">
+                    <input type="date" name="deliveryDate" th:min="${minDate}" required>
+                    <small>Minimum 2 days advance booking required</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 4h10v16H7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 8h6M9 12h6M9 16h4"/>
+                    </svg>
+                    Special Instructions
+                </div>
+                <textarea name="specialInstructions" rows="3"
+                          placeholder="e.g. Nut-free, extra cream, specific decoration style... (optional)"></textarea>
+            </div>
+
+            <div class="price-display" id="priceDisplay" style="display:none;">
+                <div style="color:#666; font-size:14px;">Estimated Price</div>
+                <div class="amount" id="priceAmount">Rs. 0.00</div>
+                <div style="color:#888; font-size:12px; margin-top:4px;">Final price may vary based on decorations</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:14px; font-size:16px;">
+                <svg class="submit-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14v8H5z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12c0-2.2 3.1-4 7-4s7 1.8 7 4"/>
+                </svg>
+                Place Custom Order
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+    function selectSize(el, price) {
+        document.querySelectorAll('.size-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        document.getElementById('priceDisplay').style.display = 'block';
+        document.getElementById('priceAmount').textContent = 'Rs. ' + price.toLocaleString() + '.00';
+    }
+    function selectFlavor(el) {
+        document.querySelectorAll('.flavor-btn').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+</script>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

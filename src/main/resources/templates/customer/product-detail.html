@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${product.name} + ' - MC Bakers'">Product - MC Bakers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .detail-wrap { display:flex; gap:32px; flex-wrap:wrap; margin-bottom:40px; }
+        .detail-img { width:320px; height:280px; object-fit:cover; border-radius:16px; box-shadow:var(--shadow-md); flex-shrink:0; }
+        .detail-info { flex:1; min-width:220px; }
+        .detail-info h2 { margin-bottom:8px; }
+        .detail-price { font-size:1.6rem; font-weight:700; color:var(--brown-main); margin:8px 0; }
+        .detail-stock { color:var(--text-muted); font-size:0.9rem; margin-bottom:16px; }
+
+        /* Stars display */
+        .stars-display { display:flex; align-items:center; gap:8px; margin:10px 0; }
+        .star { font-size:1.4rem; color:#ddd; }
+        .star.filled { color:#F0C030; }
+        .avg-label { font-size:0.95rem; color:var(--text-muted); }
+
+        /* Rating form */
+        .rating-section { background:#fff; border:1px solid var(--border); border-radius:16px; padding:28px; margin-bottom:28px; }
+        .rating-section h3 { margin-bottom:18px; }
+        .star-picker { display:flex; gap:6px; margin-bottom:14px; }
+        .star-picker input[type=radio] { display:none; }
+        .star-picker label { font-size:2rem; color:#ddd; cursor:pointer; transition:color 0.15s; }
+        .star-picker input[type=radio]:checked ~ label,
+        .star-picker label:hover,
+        .star-picker label:hover ~ label { color:#ddd; }
+        .star-picker { direction: rtl; display:inline-flex; }
+        .star-picker label:hover,
+        .star-picker label:hover ~ label { color:#ddd; }
+        .star-picker input[type=radio]:checked ~ label { color:#ddd; }
+
+        /* RTL star trick */
+        .star-picker { direction:rtl; }
+        .star-picker label:hover,
+        .star-picker label:hover ~ label,
+        .star-picker input:checked ~ label { color:#F0C030 !important; }
+
+        .review-textarea { width:100%; padding:12px; border:1px solid var(--border); border-radius:8px;
+                           font-family:inherit; font-size:14px; resize:vertical; min-height:80px; outline:none; }
+        .review-textarea:focus { border-color:var(--brown-main); }
+
+        /* Reviews list */
+        .reviews-list { display:flex; flex-direction:column; gap:16px; }
+        .review-card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px; }
+        .review-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+        .reviewer-name { font-weight:600; color:var(--brown-dark); }
+        .review-date { font-size:0.8rem; color:var(--text-muted); }
+        .review-text { color:var(--text-mid); font-size:0.95rem; margin-top:6px; }
+        .no-reviews { text-align:center; padding:32px; color:var(--text-muted); }
+
+        .success-msg { background:#e8f5e9; border:1px solid #a5d6a7; color:#2e7d32;
+                       padding:12px 18px; border-radius:8px; margin-bottom:20px; }
+        .my-rating-badge { background:var(--brown-pale); color:var(--brown-dark);
+                           font-size:0.8rem; padding:3px 10px; border-radius:20px; font-weight:600; }
+        .btn svg { width:16px; height:16px; flex-shrink:0; }
+    </style>
+</head>
+<body>
+<nav th:replace="~{fragments/customer-navbar :: navbar}"></nav>
+
+<div class="container">
+    <!-- Back -->
+    <div class="page-back-row">
+        <a th:href="@{/customer/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+    </div>
+
+    <!-- Success message -->
+    <div th:if="${success}" class="success-msg" th:text="${success}"></div>
+
+    <!-- Product Detail -->
+    <div class="detail-wrap">
+        <img th:src="@{/images/products/{img}(img=${product.image})}"
+             th:alt="${product.name}" class="detail-img"
+             onerror="this.src='/images/products/default.svg'">
+
+        <div class="detail-info">
+            <h2 th:text="${product.name}"></h2>
+
+            <!-- Average stars -->
+            <div class="stars-display">
+                <span th:each="i : ${#numbers.sequence(1, 5)}"
+                      th:class="${i <= avgStars} ? 'star filled' : 'star'">&#9733;</span>
+                <span class="avg-label"
+                      th:text="${avgStars > 0} ? ${#numbers.formatDecimal(avgStars,1,1)} + ' / 5  (' + ${ratingCount} + ' ratings)' : 'No ratings yet'">
+                </span>
+            </div>
+
+            <div class="detail-price" th:text="'Rs. ' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
+            <div class="detail-stock" th:text="'In stock: ' + ${product.stock}"></div>
+
+            <!-- Add to cart -->
+            <form th:action="@{/customer/cart/add}" method="post" style="display:flex;gap:10px;align-items:center;">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <input type="number" name="quantity" value="1" min="1" th:max="${product.stock}" class="qty-input">
+                <button type="submit" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 7h15l-2 9H8L6 7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 7L5 4H3"/>
+                    </svg>
+                    Add to Cart
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Rating Form -->
+    <div class="rating-section">
+
+        <h3>
+
+        <span th:if="${myRating != null}">
+
+            Update Your Rating
+
+            <span class="my-rating-badge">
+                Already rated
+            </span>
+
+        </span>
+
+            <span th:if="${myRating == null}">
+            Rate This Product
+        </span>
+
+        </h3>
+
+        <!-- Submit / Update Rating -->
+        <form th:action="@{/customer/rating/submit}"
+              method="post">
+
+            <input type="hidden"
+                   name="productId"
+                   th:value="${product.id}">
+
+            <!-- Star Picker -->
+            <div class="star-picker">
+
+                <!-- 5 -->
+                <input type="radio"
+                       id="s5"
+                       name="stars"
+                       value="5"
+                       th:checked="${myRating != null and myRating.stars == 5}">
+
+                <label for="s5">&#9733;</label>
+
+                <!-- 4 -->
+                <input type="radio"
+                       id="s4"
+                       name="stars"
+                       value="4"
+                       th:checked="${myRating != null and myRating.stars == 4}">
+
+                <label for="s4">&#9733;</label>
+
+                <!-- 3 -->
+                <input type="radio"
+                       id="s3"
+                       name="stars"
+                       value="3"
+                       th:checked="${myRating != null and myRating.stars == 3}">
+
+                <label for="s3">&#9733;</label>
+
+                <!-- 2 -->
+                <input type="radio"
+                       id="s2"
+                       name="stars"
+                       value="2"
+                       th:checked="${myRating != null and myRating.stars == 2}">
+
+                <label for="s2">&#9733;</label>
+
+                <!-- 1 -->
+                <input type="radio"
+                       id="s1"
+                       name="stars"
+                       value="1"
+                       th:checked="${myRating != null and myRating.stars == 1}">
+
+                <label for="s1">&#9733;</label>
+
+            </div>
+
+            <!-- Review Text -->
+            <div style="margin-top:14px;">
+
+            <textarea name="review"
+                      class="review-textarea"
+                      placeholder="Optional: write your review..."
+                      th:text="${myRating != null} ? ${myRating.review} : ''"></textarea>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="
+            display:flex;
+            gap:12px;
+            margin-top:14px;
+            flex-wrap:wrap;
+        ">
+
+                <!-- Submit / Update -->
+                <button type="submit"
+                        class="btn btn-primary">
+
+                <span th:if="${myRating != null}">
+                    Update Rating
+                </span>
+
+                    <span th:if="${myRating == null}">
+                    Submit Rating
+                </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <!-- Delete Rating -->
+        <form th:if="${myRating != null}"
+              th:action="@{/customer/rating/delete}"
+              method="post"
+              style="margin-top:12px;">
+
+            <input type="hidden"
+                   name="productId"
+                   th:value="${product.id}">
+
+            <button type="submit"
+                    class="btn btn-danger"
+                    onclick="return confirm('Delete your rating?')">
+
+                Delete Rating
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Reviews List -->
+    <h3>Reviews (<span th:text="${ratingCount}"></span>)</h3>
+    <div class="reviews-list" th:if="${not #lists.isEmpty(ratings)}">
+        <div th:each="r : ${ratings}" class="review-card">
+            <div class="review-header">
+                <div>
+                    <span class="reviewer-name" th:text="${r.user.name}"></span>
+                    <span th:each="i : ${#numbers.sequence(1, 5)}"
+                          th:style="${i <= r.stars} ? 'color:#F0C030;font-size:1rem;' : 'color:#ddd;font-size:1rem;'">&#9733;</span>
+                </div>
+                <span class="review-date"
+                      th:text="${#temporals.format(r.createdAt, 'MMM dd, yyyy')}"></span>
+            </div>
+            <div th:if="${r.review != null}" class="review-text" th:text="${r.review}"></div>
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(ratings)}" class="no-reviews">
+        <p>Be the first to rate this product.</p>
+    </div>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

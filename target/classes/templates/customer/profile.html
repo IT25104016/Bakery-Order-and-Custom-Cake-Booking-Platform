@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - MC Bakers</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <style>
+    .profile-card {
+      max-width: 620px;
+    }
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .profile-header h2 {
+      margin: 0;
+    }
+
+    .profile-pic-wrap {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile-pic-img,
+    .pic-preview,
+    .pic-placeholder {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      border: 3px solid var(--brown-light);
+      box-shadow: var(--shadow-md);
+    }
+
+    .profile-pic-img,
+    .pic-preview {
+      object-fit: cover;
+      display: block;
+      background: var(--brown-pale);
+    }
+
+    .pic-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--brown-pale);
+      color: var(--brown-main);
+      font-size: 2.7rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .pic-preview {
+      display: none;
+      border-color: var(--gold);
+    }
+
+    .pic-upload-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .pic-upload-label input {
+      display: none;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .delete-pic-btn {
+      color: #C0392B;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .delete-pic-btn:hover {
+      color: #922B21;
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="~{fragments/customer-navbar :: navbar}"></nav>
+
+<div class="container">
+  <div class="page-back-row">
+    <a th:href="@{/customer/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+  </div>
+  <div class="form-card profile-card">
+    <div class="profile-header">
+      <div>
+        <h2>My Profile</h2>
+        <p style="color:var(--text-muted);margin-top:4px;">Update your account details and profile picture.</p>
+      </div>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <div id="profilePicError" class="alert alert-error" style="display:none;"></div>
+
+    <form th:action="@{/customer/profile}" method="post" enctype="multipart/form-data" onsubmit="return validateProfileForm()">
+      <div class="profile-pic-wrap">
+        <img th:if="${hasProfilePic}"
+             th:src="@{/images/profiles/{pic}(pic=${profilePic})}"
+             class="profile-pic-img"
+             id="currentPic"
+             alt="Profile picture"
+             onerror="showProfilePlaceholder()">
+
+        <div class="pic-placeholder"
+             id="placeholder"
+             th:style="${hasProfilePic} ? 'display:none;' : 'display:flex;'"
+             th:text="${userInitial}">U</div>
+
+        <img id="picPreview" class="pic-preview" alt="Selected profile picture preview">
+
+        <label class="pic-upload-label btn btn-secondary btn-sm">
+          Change Picture
+          <input type="file"
+                 name="profilePicFile"
+                 id="profilePicInput"
+                 accept="image/jpeg,image/png,image/gif,image/webp"
+                 onchange="previewPic(this)">
+        </label>
+        <small>JPG, PNG, GIF, or WebP. Max 2MB.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="name" th:value="${user.name}" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" th:value="${user.email}" disabled style="background:#f5f5f5;color:#888;">
+        <small>Email cannot be changed.</small>
+      </div>
+
+      <div class="form-group">
+        <label>New Password <small style="color:#888;">Leave blank to keep current password.</small></label>
+        <input type="password" name="newPassword" placeholder="Enter new password">
+      </div>
+
+      <div class="profile-actions">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+
+    <div th:if="${hasProfilePic}" style="margin-top:18px;text-align:center;border-top:1px solid var(--border);padding-top:16px;">
+      <form th:action="@{/customer/profile/delete-pic}" method="post"
+            onsubmit="return confirm('Delete profile picture?')">
+        <button type="submit" class="delete-pic-btn">Delete Profile Picture</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setProfilePicError(message) {
+    const error = document.getElementById('profilePicError');
+    error.textContent = message;
+    error.style.display = message ? 'flex' : 'none';
+  }
+
+  function showProfilePlaceholder() {
+    const current = document.getElementById('currentPic');
+    const placeholder = document.getElementById('placeholder');
+
+    if (current) current.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'flex';
+  }
+
+  function previewPic(input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      setProfilePicError('Profile picture must be 2MB or smaller.');
+      input.value = '';
+      return;
+    }
+
+    setProfilePicError('');
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const preview = document.getElementById('picPreview');
+      const current = document.getElementById('currentPic');
+      const placeholder = document.getElementById('placeholder');
+
+      preview.src = event.target.result;
+      preview.style.display = 'block';
+      if (current) current.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function validateProfileForm() {
+    const input = document.getElementById('profilePicInput');
+    const file = input.files && input.files[0];
+
+    if (file && file.size > 2 * 1024 * 1024) {
+      setProfilePicError('Profile picture must be 2MB or smaller.');
+      return false;
+    }
+
+    return true;
+  }
+
+  (function() {
+    var button = document.getElementById('navToggle');
+    var menu = document.getElementById('navLinks');
+
+    if (button && menu) {
+      button.addEventListener('click', function() {
+        menu.classList.toggle('open');
+      });
+    }
+  })();
+</script>
+</body>
+</html>

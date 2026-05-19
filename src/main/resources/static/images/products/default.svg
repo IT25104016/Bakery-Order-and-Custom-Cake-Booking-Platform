@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Bakery product placeholder">
+  <rect width="640" height="420" fill="#fff8f0"/>
+  <circle cx="320" cy="190" r="92" fill="#f0c878"/>
+  <path d="M225 240c42 48 150 48 190 0 10 58-28 100-95 100s-105-42-95-100z" fill="#8b4513"/>
+  <path d="M250 178c18-58 122-58 140 0 8 28-18 58-70 58s-78-30-70-58z" fill="#d89b56"/>
+  <circle cx="285" cy="170" r="9" fill="#fff"/>
+  <circle cx="332" cy="155" r="9" fill="#fff"/>
+  <circle cx="362" cy="185" r="9" fill="#fff"/>
+  <text x="320" y="382" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#5d2f12">MC Bakers</text>
+</svg>

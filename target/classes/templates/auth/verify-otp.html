@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verify - MC Bakers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .otp-inputs input {
+            width: 48px;
+            height: 56px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .otp-inputs input:focus {
+            border-color: #8B4513;
+        }
+
+        .timer-text {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .timer-text span {
+            font-weight: bold;
+            color: #c0392b;
+        }
+
+        .resend-form {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: #8B4513;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.95rem;
+            padding: 0;
+        }
+
+        .btn-link:disabled {
+            color: #aaa;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+
+        .email-badge {
+            background: #f5efe6;
+            border: 1px solid #dcc9a8;
+            border-radius: 8px;
+            padding: 8px 14px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .email-badge strong {
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body class="auth">
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/register}" class="btn btn-secondary btn-sm">Back to Register</a>
+    </div>
+    <div class="form-card">
+        <h2 style="display:flex;align-items:center;gap:10px;">
+            <img th:src="@{/images/logo.png}" width="40" alt="logo"> MC Bakers
+        </h2>
+
+        <h3>Email Verification</h3>
+
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <div th:if="${info}" class="alert alert-info" th:text="${info}"></div>
+
+        <div class="email-badge">
+            OTP code was sent to <strong th:text="${email}"></strong>.
+        </div>
+
+        <form th:action="@{/verify-otp}" method="post" id="otpForm">
+            <p style="text-align:center;color:#555;margin-bottom:6px;">
+                Enter your 6-digit OTP.
+            </p>
+
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" class="otp-box" id="b1" inputmode="numeric" autofocus>
+                <input type="text" maxlength="1" class="otp-box" id="b2" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-box" id="b3" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-box" id="b4" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-box" id="b5" inputmode="numeric">
+                <input type="text" maxlength="1" class="otp-box" id="b6" inputmode="numeric">
+            </div>
+
+            <input type="hidden" name="otp" id="hiddenOtp">
+
+            <div class="timer-text">
+                Valid until: <span id="countdown">05:00</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">Verify & Register</button>
+        </form>
+
+        <form th:action="@{/resend-otp}" method="post" class="resend-form">
+            <button type="submit" class="btn-link" id="resendBtn" disabled>
+                Resend OTP
+            </button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    const boxes = document.querySelectorAll('.otp-box');
+
+    boxes.forEach((box, i) => {
+        box.addEventListener('input', () => {
+            box.value = box.value.replace(/\D/g, '');
+
+            if (box.value && i < boxes.length - 1) {
+                boxes[i + 1].focus();
+            }
+        });
+
+        box.addEventListener('keydown', e => {
+            if (e.key === 'Backspace' && !box.value && i > 0) {
+                boxes[i - 1].focus();
+            }
+        });
+
+        box.addEventListener('paste', e => {
+            e.preventDefault();
+            const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+
+            [...pasted].slice(0, 6).forEach((ch, j) => {
+                if (boxes[j]) {
+                    boxes[j].value = ch;
+                }
+            });
+
+            const next = Math.min(pasted.length, 5);
+            boxes[next].focus();
+        });
+    });
+
+    document.getElementById('otpForm').addEventListener('submit', e => {
+        const otp = [...boxes].map(b => b.value).join('');
+
+        if (otp.length < 6) {
+            e.preventDefault();
+            alert('Enter your 6-digit OTP code.');
+            return;
+        }
+
+        document.getElementById('hiddenOtp').value = otp;
+    });
+
+    let seconds = 300;
+    const countEl = document.getElementById('countdown');
+    const resendBtn = document.getElementById('resendBtn');
+
+    const timer = setInterval(() => {
+        seconds--;
+        const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+        const remainingSeconds = String(seconds % 60).padStart(2, '0');
+        countEl.textContent = minutes + ':' + remainingSeconds;
+
+        if (seconds <= 0) {
+            clearInterval(timer);
+            countEl.textContent = '00:00';
+            countEl.style.color = '#aaa';
+            resendBtn.disabled = false;
+        }
+    }, 1000);
+</script>
+</body>
+</html>

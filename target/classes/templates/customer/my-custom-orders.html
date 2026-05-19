@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>My Custom Orders - MC Bakers</title><link rel="stylesheet" th:href="@{/css/style.css}">
+<style>
+    .status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+    .status-Pending   { background:#fff3cd; color:#856404; }
+    .status-Confirmed { background:#cce5ff; color:#004085; }
+    .status-Baking    { background:#ffe5cc; color:#7d3a00; }
+    .status-Ready     { background:#d4edda; color:#155724; }
+    .status-Completed { background:#e2e3e5; color:#383d41; }
+    .status-Cancelled { background:#f8d7da; color:#721c24; }
+    .detail-cell { font-size:12px; color:#666; }
+    .title-with-icon { display:flex; align-items:center; gap:8px; }
+    .title-with-icon svg { width:24px; height:24px; color:var(--brown-main); }
+</style>
+</head>
+<body>
+<nav th:replace="~{fragments/customer-navbar :: navbar}"></nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/customer/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+    </div>
+    <div class="page-header-actions">
+        <h2 class="title-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14v8H5z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12c0-2.2 3.1-4 7-4s7 1.8 7 4"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 8V5M12 8V5M16 8V5"/>
+            </svg>
+            My Custom Orders
+        </h2>
+        <div class="page-actions">
+            <a th:href="@{/customer/my-orders}" class="btn btn-secondary btn-sm">Regular Orders</a>
+            <a th:href="@{/customer/custom-order}" class="btn btn-primary">+ New Custom Order</a>
+        </div>
+    </div>
+
+    <div th:if="${orders.isEmpty()}" class="empty-cart">
+        <p>No custom orders yet.</p>
+        <a th:href="@{/customer/custom-order}" class="btn btn-primary">Place Your First Custom Order</a>
+    </div>
+
+    <div th:unless="${orders.isEmpty()}">
+        <div class="table-wrap"><table class="table">
+            <thead>
+                <tr>
+                    <th>Order #</th><th>Size & Flavor</th>
+                    <th>Message</th><th>Delivery Date</th><th>Notes</th>
+                    <th>Price</th><th>Status</th><th>Ordered On</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="o : ${orders}">
+                    <td th:text="'#' + ${o.id}"></td>
+                    <td>
+                        <strong th:text="${o.size}"></strong><br>
+                        <span class="detail-cell" th:text="${o.flavor.label}"></span>
+                    </td>
+                    <td th:text="${o.customMessage != null and !o.customMessage.isEmpty()} ? ${o.customMessage} : 'N/A'"></td>
+                    <td th:text="${o.deliveryDate}"></td>
+                    <td th:text="${o.specialInstructions != null and !o.specialInstructions.isEmpty()} ? ${o.specialInstructions} : 'N/A'"></td>
+                    <td th:text="'Rs. ' + ${#numbers.formatDecimal(o.price, 1, 2)}"></td>
+                    <td>
+                        <span class="status-badge"
+                              th:classappend="'status-' + ${o.status}"
+                              th:text="${o.status}"></span>
+                    </td>
+                    <td th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

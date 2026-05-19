@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Create Admin - MC Bakers
+    </title>
+
+    <link rel="icon"
+          type="image/png"
+          th:href="@{/images/logo.png}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <style>
+
+        body{
+
+            min-height:100vh;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            background:
+                    linear-gradient(
+                            rgba(255,255,255,.88),
+                            rgba(255,255,255,.88)
+                    ),
+                    url('/images/bg.jpg');
+
+            background-size:cover;
+
+            background-position:center;
+
+            background-attachment:fixed;
+        }
+
+        .admin-form-wrap{
+
+            width:100%;
+
+            max-width:480px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(255,255,255,.96),
+                            rgba(248,240,232,.96)
+                    );
+
+            padding:42px;
+
+            border-radius:26px;
+
+            box-shadow:
+                    0 14px 36px rgba(0,0,0,.10);
+
+            position:relative;
+
+            overflow:hidden;
+
+            backdrop-filter:blur(10px);
+
+            border:
+                    1px solid rgba(255,255,255,.35);
+
+            animation:
+                    fadeIn .5s ease;
+        }
+
+        /* TOP GOLD LINE */
+
+        .admin-form-wrap::before{
+
+            content:'';
+
+            position:absolute;
+
+            top:0;
+
+            left:0;
+
+            width:100%;
+
+            height:5px;
+
+            background:
+                    linear-gradient(
+                            90deg,
+                            var(--gold),
+                            #f5d58c
+                    );
+        }
+
+        /* LOGO */
+
+        .admin-logo{
+
+            display:flex;
+
+            justify-content:center;
+
+            margin-bottom:18px;
+        }
+
+        .admin-logo img{
+
+            width:74px;
+
+            height:74px;
+
+            border-radius:50%;
+
+            border:3px solid #F0C878;
+
+            box-shadow:
+                    0 4px 16px rgba(240,200,120,.28);
+        }
+
+        /* TITLE */
+
+        .admin-form-wrap h2{
+
+            text-align:center;
+
+            margin-bottom:6px;
+
+            color:#5C3B1E;
+        }
+
+        .admin-sub{
+
+            text-align:center;
+
+            color:#7b6858;
+
+            margin-bottom:28px;
+
+            font-size:14px;
+        }
+
+        /* FORM */
+
+        .admin-form{
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:18px;
+        }
+
+        .admin-form input{
+
+            padding:15px 16px;
+
+            border:1px solid #ddd;
+
+            border-radius:14px;
+
+            font-size:15px;
+
+            outline:none;
+
+            transition:.28s ease;
+
+            background:rgba(255,255,255,.9);
+        }
+
+        .admin-form input:focus{
+
+            border-color:#A45A1C;
+
+            box-shadow:
+                    0 0 0 4px rgba(164,90,28,.12);
+        }
+
+        /* BUTTON */
+
+        .admin-form button{
+
+            padding:15px;
+
+            border:none;
+
+            border-radius:14px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #A45A1C,
+                            #7B3F12
+                    );
+
+            color:white;
+
+            font-size:15px;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:all .3s ease;
+
+            box-shadow:
+                    0 8px 18px rgba(0,0,0,.10);
+        }
+
+        .admin-form button:hover{
+
+            transform:
+                    translateY(-2px);
+
+            box-shadow:
+                    0 12px 24px rgba(0,0,0,.16);
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #B86422,
+                            #8A4517
+                    );
+        }
+
+        /* ALERTS */
+
+        .success-msg{
+
+            background:#e8f5e9;
+
+            color:#2e7d32;
+
+            border:1px solid #a5d6a7;
+
+            padding:14px;
+
+            border-radius:14px;
+
+            margin-bottom:18px;
+
+            text-align:center;
+
+            font-weight:600;
+        }
+
+        .error-msg{
+
+            background:#ffebee;
+
+            color:#c62828;
+
+            border:1px solid #ef9a9a;
+
+            padding:14px;
+
+            border-radius:14px;
+
+            margin-bottom:18px;
+
+            text-align:center;
+
+            font-weight:600;
+        }
+
+        /* BACK BUTTON */
+
+        .back-link{
+
+            display:inline-flex;
+
+            align-items:center;
+
+            gap:6px;
+
+            margin-top:20px;
+
+            color:#7B3F12;
+
+            font-weight:600;
+
+            text-decoration:none;
+
+            transition:.2s;
+        }
+
+        .back-link:hover{
+
+            color:#A45A1C;
+
+            transform:translateX(-2px);
+        }
+
+        /* ANIMATION */
+
+        @keyframes fadeIn{
+
+            from{
+
+                opacity:0;
+
+                transform:
+                        translateY(12px);
+            }
+
+            to{
+
+                opacity:1;
+
+                transform:
+                        translateY(0);
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="admin-form-wrap">
+
+    <!-- LOGO -->
+
+    <div class="admin-logo">
+
+        <img th:src="@{/images/logo.png}"
+             alt="MC Bakers">
+
+    </div>
+
+    <!-- TITLE -->
+
+    <h2>
+        Create New Admin
+    </h2>
+
+    <p class="admin-sub">
+
+        Add another administrator
+        to manage the bakery system.
+
+    </p>
+
+    <!-- SUCCESS -->
+
+    <div th:if="${success}"
+         class="success-msg"
+         th:text="${success}">
+
+    </div>
+
+    <!-- ERROR -->
+
+    <div th:if="${error}"
+         class="error-msg"
+         th:text="${error}">
+
+    </div>
+
+    <!-- FORM -->
+
+    <form th:action="@{/admin/create-admin}"
+          method="post"
+          class="admin-form">
+
+        <input type="text"
+               name="name"
+               placeholder="Admin Name"
+               required>
+
+        <input type="email"
+               name="email"
+               placeholder="Admin Email"
+               required>
+
+        <input type="password"
+               name="password"
+               placeholder="Password"
+               required>
+
+        <button type="submit">
+
+            Create Admin
+
+        </button>
+
+    </form>
+
+    <!-- BACK -->
+
+    <a th:href="@{/admin/dashboard}"
+       class="back-link">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+</body>
+</html>
+

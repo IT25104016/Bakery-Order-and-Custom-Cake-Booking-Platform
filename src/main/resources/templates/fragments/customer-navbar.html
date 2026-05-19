@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<nav class="navbar" th:fragment="navbar">
+    <span class="navbar-brand">
+        <img th:src="@{/images/logo.png}"
+             width="36"
+             alt="logo">
+        MC Bakers
+    </span>
+
+    <button class="hamburger"
+            id="navToggle"
+            aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="navbar-links" id="navLinks">
+        <div sec:authorize="isAuthenticated()"
+             class="navbar-user-links">
+            <img th:if="${hasProfilePic}"
+                 th:src="@{/images/profiles/{p}(p=${profilePic})}"
+                 class="nav-avatar"
+                 alt="profile"
+                 onerror="this.style.display='none'">
+            <span th:if="${!hasProfilePic}"
+                  class="nav-avatar-placeholder"
+                  th:text="${userInitial}">U</span>
+
+            <span style="color:#d4b89a;">
+                Welcome,
+                <span th:text="${userName}"></span>
+            </span>
+
+            <a th:href="@{/customer/products}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 2 8h1v5a1 1 0 0 0 1 1h3V10h2v4h3a1 1 0 0 0 1-1V8h1a.5.5 0 0 0 .354-.854z"/>
+                </svg>
+                Home
+            </a>
+
+            <a th:href="@{/customer/cart}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .49.402L2.89 3H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.49-.402L1.01 2H.5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                Cart
+            </a>
+
+            <a th:href="@{/customer/my-orders}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M14 4.5V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h7.5L14 4.5z"/>
+                </svg>
+                My Orders
+            </a>
+
+            <a th:href="@{/customer/profile}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2 1H6a4 4 0 0 0-4 4v1h12v-1a4 4 0 0 0-4-4z"/>
+                </svg>
+                Profile
+            </a>
+
+            <a th:href="@{/logout}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M6 2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3v-2H6V4h3V2H6zm5.854 5.146-2-2-.708.708L10.293 7H7v1h3.293l-1.147 1.146.708.708 2-2a.5.5 0 0 0 0-.708z"/>
+                </svg>
+                Logout
+            </a>
+        </div>
+
+        <div sec:authorize="isAnonymous()"
+             class="navbar-user-links">
+            <a th:href="@{/login}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M6 2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3v-2H6V4h3V2H6zm5.854 5.146-2-2-.708.708L10.293 7H7v1h3.293l-1.147 1.146.708.708 2-2a.5.5 0 0 0 0-.708z"/>
+                </svg>
+                Sign In
+            </a>
+
+            <a th:href="@{/register}" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm4 5c0-1.657-2.239-3-5-3s-5 1.343-5 3v1h10v-1z"/>
+                </svg>
+                Register
+            </a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

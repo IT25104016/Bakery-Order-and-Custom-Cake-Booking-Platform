@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed - MC Bakers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+        .status-Pending   { background:#fff3cd; color:#856404; }
+        .status-Confirmed { background:#cce5ff; color:#004085; }
+        .status-Baking    { background:#ffe5cc; color:#7d3a00; }
+        .status-Ready     { background:#d4edda; color:#155724; }
+        .status-Completed { background:#e2e3e5; color:#383d41; }
+        .status-Cancelled { background:#f8d7da; color:#721c24; }
+        .success-icon {
+            width:64px; height:64px; border-radius:50%;
+            display:inline-flex; align-items:center; justify-content:center;
+            background:#fff3e0; color:var(--brown-main);
+            border:2px solid var(--brown-light); margin-bottom:18px;
+        }
+        .success-icon svg { width:34px; height:34px; }
+        .order-actions {
+            display:flex; justify-content:center; gap:10px;
+            flex-wrap:wrap; margin-top:24px;
+        }
+        .order-actions .btn svg { width:16px; height:16px; flex-shrink:0; }
+    </style>
+</head>
+<body>
+<nav th:replace="~{fragments/customer-navbar :: navbar}"></nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/customer/products}" class="btn btn-secondary btn-sm">Back to Products</a>
+    </div>
+    <div class="success-card">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14v8H5z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12c0-2.2 3.1-4 7-4s7 1.8 7 4"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 8V5M12 8V5M16 8V5"/>
+            </svg>
+        </div>
+        <h2>Custom Cake Order Placed!</h2>
+        <p>Thank you, <strong th:text="${userName}"></strong>! We'll start preparing your custom cake.</p>
+
+        <div th:if="${orderId}" style="background:#fff8f0; border-radius:10px; padding:16px; margin:20px 0;">
+            <p>Order ID: <strong>#<span th:text="${orderId}"></span></strong></p>
+            <p>Estimated Price: <strong>Rs. <span th:text="${#numbers.formatDecimal(orderPrice, 1, 2)}"></span></strong></p>
+        </div>
+
+        <h3 style="margin-top:24px;">My Custom Orders</h3>
+        <div class="table-wrap"><table class="table" style="margin-top:12px;">
+            <thead>
+                <tr><th>Order #</th><th>Size</th><th>Flavor</th><th>Delivery</th><th>Price</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="o : ${myOrders}">
+                    <td th:text="'#' + ${o.id}"></td>
+                    <td th:text="${o.size}"></td>
+                    <td th:text="${o.flavor.label}"></td>
+                    <td th:text="${o.deliveryDate}"></td>
+                    <td th:text="'Rs. ' + ${#numbers.formatDecimal(o.price, 1, 2)}"></td>
+                    <td>
+                        <span class="status-badge"
+                              th:classappend="'status-' + ${o.status}"
+                              th:text="${o.status}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="order-actions">
+            <a th:href="@{/customer/products}" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 7h15l-2 9H8L6 7z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 7L5 4H3"/>
+                </svg>
+                Continue Shopping
+            </a>
+            <a th:href="@{/customer/my-orders}" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-3 2-3-2-3 2-3-2V5a2 2 0 0 1 2-2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 8h8M8 12h8M8 16h5"/>
+                </svg>
+                Regular Orders
+            </a>
+            <a th:href="@{/customer/custom-order}" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14v8H5z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12c0-2.2 3.1-4 7-4s7 1.8 7 4"/>
+                </svg>
+                New Custom Order
+            </a>
+        </div>
+    </div>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <link rel="icon"
+          type="image/png"
+          th:href="@{/images/logo.png}">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Admin Dashboard - MC Bakers
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <style>
+
+        /* DASHBOARD HEADER */
+
+        .dashboard-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:28px;
+
+            gap:20px;
+
+            flex-wrap:wrap;
+        }
+
+        .dashboard-sub{
+
+            color:#7b6858;
+
+            margin-top:4px;
+        }
+
+        /* STATS */
+
+        .dashboard-stats{
+
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(220px,1fr));
+
+            gap:22px;
+
+            margin-bottom:28px;
+        }
+
+        .stat-card{
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(255,255,255,.96),
+                            rgba(248,240,232,.96)
+                    );
+
+            border-radius:22px;
+
+            padding:26px;
+
+            position:relative;
+
+            overflow:hidden;
+
+            box-shadow:
+                    0 8px 24px rgba(0,0,0,.06);
+
+            border:
+                    1px solid rgba(255,255,255,.4);
+
+            transition:all .3s ease;
+        }
+
+        .stat-card:hover{
+
+            transform:
+                    translateY(-4px);
+
+            box-shadow:
+                    0 14px 28px rgba(0,0,0,.10);
+        }
+
+        .stat-card::before{
+
+            content:'';
+
+            position:absolute;
+
+            top:0;
+
+            left:0;
+
+            width:100%;
+
+            height:5px;
+
+            background:
+                    linear-gradient(
+                            90deg,
+                            var(--gold),
+                            #f8d48b
+                    );
+        }
+
+        .stat-card h3{
+
+            font-size:2rem;
+
+            margin-bottom:6px;
+
+            color:var(--brown-dark);
+        }
+
+        .stat-card p{
+
+            color:#7b6858;
+
+            font-weight:500;
+
+            margin:0;
+        }
+
+        /* REVENUE CARD */
+
+        .revenue-card{
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #A45A1C,
+                            #7B3F12
+                    );
+
+            color:white;
+        }
+
+        .revenue-card h3,
+        .revenue-card p{
+
+            color:white;
+        }
+
+        /* SALES CHART */
+
+        .sales-chart-box{
+
+            margin-top:24px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(255,255,255,.97),
+                            rgba(249,243,236,.97)
+                    );
+
+            border-radius:18px;
+
+            padding:24px;
+
+            box-shadow:
+                    0 8px 24px rgba(0,0,0,.06);
+
+            border:
+                    1px solid rgba(123,63,18,.08);
+        }
+
+        .sales-chart-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            gap:14px;
+
+            margin-bottom:18px;
+
+            flex-wrap:wrap;
+        }
+
+        .sales-chart-header h3{
+
+            margin:0;
+
+            color:var(--brown-dark);
+        }
+
+        .sales-chart-header span{
+
+            color:#7b6858;
+
+            font-size:.92rem;
+
+            font-weight:600;
+        }
+
+        .sales-chart-list{
+
+            display:grid;
+
+            gap:14px;
+        }
+
+        .sales-chart-row{
+
+            display:grid;
+
+            grid-template-columns:
+            minmax(120px,220px) 1fr minmax(54px,auto);
+
+            gap:14px;
+
+            align-items:center;
+        }
+
+        .sales-chart-name{
+
+            color:var(--brown-dark);
+
+            font-weight:700;
+
+            overflow:hidden;
+
+            text-overflow:ellipsis;
+
+            white-space:nowrap;
+        }
+
+        .sales-chart-track{
+
+            height:16px;
+
+            background:#f0e4d7;
+
+            border-radius:999px;
+
+            overflow:hidden;
+        }
+
+        .sales-chart-fill{
+
+            height:100%;
+
+            border-radius:999px;
+
+            background:
+                    linear-gradient(
+                            90deg,
+                            #A45A1C,
+                            #F0C878
+                    );
+        }
+
+        .sales-chart-count{
+
+            color:#7b6858;
+
+            font-size:.92rem;
+
+            font-weight:700;
+
+            text-align:right;
+
+            white-space:nowrap;
+        }
+
+        .sales-chart-empty{
+
+            color:#7b6858;
+
+            margin:0;
+        }
+
+        /* LOW STOCK */
+
+        .low-stock-box{
+
+            margin-top:20px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #fff6f2,
+                            #fff1ec
+                    );
+
+            border-left:5px solid #d35400;
+
+            border-radius:18px;
+
+            padding:22px;
+
+            box-shadow:
+                    0 6px 20px rgba(0,0,0,.05);
+        }
+
+        .low-stock-box ul{
+
+            margin-top:12px;
+
+            padding-left:20px;
+        }
+
+        .low-stock-box li{
+
+            margin-bottom:8px;
+        }
+
+        /* MENU GRID */
+
+        .dashboard-menu{
+
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(220px,1fr));
+
+            gap:22px;
+
+            margin-top:34px;
+        }
+
+        .menu-card{
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(255,255,255,.95),
+                            rgba(247,238,228,.95)
+                    );
+
+            border-radius:20px;
+
+            padding:28px;
+
+            text-align:center;
+
+            font-size:16px;
+
+            font-weight:700;
+
+            color:var(--brown-dark);
+
+            text-decoration:none;
+
+            transition:all .3s ease;
+
+            box-shadow:
+                    0 8px 22px rgba(0,0,0,.05);
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .menu-card::before{
+
+            content:'';
+
+            position:absolute;
+
+            inset:0;
+
+            background:
+                    linear-gradient(
+                            to bottom,
+                            rgba(255,255,255,.12),
+                            transparent
+                    );
+
+            pointer-events:none;
+        }
+
+        .menu-card:hover{
+
+            transform:
+                    translateY(-5px)
+                    scale(1.02);
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #A45A1C,
+                            #7B3F12
+                    );
+
+            color:white;
+
+            box-shadow:
+                    0 16px 32px rgba(0,0,0,.14);
+        }
+
+        @media (max-width:640px){
+
+            .sales-chart-row{
+
+                grid-template-columns:
+                1fr auto;
+            }
+
+            .sales-chart-track{
+
+                grid-column:
+                1 / -1;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <span class="navbar-brand">
+
+        <img th:src="@{/images/logo.png}"
+             width="38"
+             alt="logo">
+
+        MC Bakers Admin
+
+    </span>
+
+    <button class="hamburger"
+            id="navToggle"
+            aria-label="Menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+    <div class="navbar-links"
+         id="navLinks">
+
+        <span style="color:#d4b89a;">
+
+            Welcome,
+            <span th:text="${currentUser}"></span>
+
+        </span>
+
+        <a th:href="@{/admin/products}">
+            Products
+        </a>
+
+        <a th:href="@{/admin/orders}">
+            Orders
+        </a>
+
+        <a th:href="@{/admin/custom-orders}">
+            Custom Orders
+        </a>
+
+        <a th:href="@{/admin/users}">
+            Users
+        </a>
+
+        <a th:href="@{/logout}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h2>
+                Admin Dashboard
+            </h2>
+
+            <p class="dashboard-sub">
+
+                Manage products, orders,
+                customers and bakery operations.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+
+            <h3 th:text="${totalProducts}">
+                0
+            </h3>
+
+            <p>
+                Products
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3 th:text="${totalOrders}">
+                0
+            </h3>
+
+            <p>
+                Orders
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3 th:text="${pendingOrders}">
+                0
+            </h3>
+
+            <p>
+                Pending Orders
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3 th:text="${totalUsers}">
+                0
+            </h3>
+
+            <p>
+                Customers
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- REVENUE -->
+
+    <div class="stat-card revenue-card">
+
+        <h3>
+
+            Rs.
+            <span th:text="${#numbers.formatDecimal(totalRevenue,1,2)}">
+
+                0.00
+
+            </span>
+
+        </h3>
+
+        <p>
+            Total Revenue
+        </p>
+
+    </div>
+
+    <!-- TOP SELLING ITEMS -->
+
+    <div class="sales-chart-box">
+
+        <div class="sales-chart-header">
+
+            <h3>
+                Top Selling Items
+            </h3>
+
+            <span>
+                By sold quantity
+            </span>
+
+        </div>
+
+        <p th:if="${#lists.isEmpty(topSellingItems)}"
+           class="sales-chart-empty">
+            No sales data yet.
+        </p>
+
+        <div th:unless="${#lists.isEmpty(topSellingItems)}"
+             class="sales-chart-list">
+
+            <div th:each="item : ${topSellingItems}"
+                 class="sales-chart-row">
+
+                <div class="sales-chart-name"
+                     th:text="${item.productName}">
+                    Product
+                </div>
+
+                <div class="sales-chart-track"
+                     th:title="|${item.quantity} sold|">
+
+                    <div class="sales-chart-fill"
+                         th:style="|width:${item.percentage}%|"></div>
+
+                </div>
+
+                <div class="sales-chart-count">
+
+                    <span th:text="${item.quantity}">
+                        0
+                    </span>
+
+                    sold
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LOW STOCK -->
+
+    <div th:if="${lowStockCount > 0}"
+         class="low-stock-box">
+
+        <strong>
+
+            ⚠ Low stock alert:
+
+        </strong>
+
+        <span th:text="${lowStockCount}"></span>
+
+        product(s) need attention.
+
+        <ul>
+
+            <li th:each="p : ${lowStockItems}">
+
+                <span th:text="${p.name}"></span>
+
+                —
+
+                <strong th:text="${p.stock}"></strong>
+
+                left
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="dashboard-menu">
+
+        <a th:href="@{/admin/product/add}"
+           class="menu-card">
+
+            Add Product
+
+        </a>
+
+        <a th:href="@{/admin/products}"
+           class="menu-card">
+
+            Manage Products
+
+        </a>
+
+        <a th:href="@{/admin/orders}"
+           class="menu-card">
+
+            Orders
+
+        </a>
+
+        <a th:href="@{/admin/custom-orders}"
+           class="menu-card">
+
+            Custom Orders
+
+        </a>
+
+        <a th:href="@{/admin/users}"
+           class="menu-card">
+
+            Manage Users
+
+        </a>
+
+        <a th:href="@{/admin/create-admin}"
+           class="menu-card">
+
+            Create Admin
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MOBILE MENU -->
+
+<script>
+
+    (function(){
+
+        var b =
+            document.getElementById('navToggle');
+
+        var m =
+            document.getElementById('navLinks');
+
+        if(b && m)
+
+            b.addEventListener(
+                'click',
+                function(){
+
+                    m.classList.toggle('open');
+
+                }
+            );
+
+    })()
+
+</script>
+
+</body>
+</html>

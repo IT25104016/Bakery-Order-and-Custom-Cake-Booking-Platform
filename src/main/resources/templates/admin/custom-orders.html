@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Orders - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+        .status-Pending { background:#fff3cd; color:#856404; }
+        .status-Confirmed { background:#cce5ff; color:#004085; }
+        .status-Baking { background:#ffe5cc; color:#7d3a00; }
+        .status-Ready { background:#d4edda; color:#155724; }
+        .status-Completed { background:#e2e3e5; color:#383d41; }
+        .status-Cancelled { background:#f8d7da; color:#721c24; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <span style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;">
+        <img th:src="@{/images/logo.png}" width="36" alt="logo" style="border-radius:50%;border:2px solid #F0C878;">
+        MC Bakers Admin
+    </span>
+    <button class="hamburger" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="navLinks">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/orders}">Orders</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/admin/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+    </div>
+    <div class="page-header-actions">
+        <h2>Custom Cake Orders</h2>
+    </div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order #</th><th>Customer</th><th>Size / Flavor</th><th>Message</th>
+            <th>Delivery</th><th>Notes</th><th>Price</th><th>Status</th><th>Date</th><th>Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orders.isEmpty()}">
+            <td colspan="10" style="text-align:center;color:#888;">No custom orders found.</td>
+        </tr>
+        <tr th:each="o : ${orders}">
+            <td th:text="'#' + ${o.id}"></td>
+            <td th:text="${o.user != null ? o.user.name : 'Deleted User'}"></td>
+            <td>
+                <span th:text="${o.size}"></span><br>
+                <small th:text="${o.flavor.label}" style="color:#666;"></small>
+            </td>
+            <td th:text="${o.customMessage != null and !o.customMessage.isEmpty()} ? ${o.customMessage} : '-'"></td>
+            <td th:text="${o.deliveryDate}"></td>
+            <td th:text="${o.specialInstructions != null and !o.specialInstructions.isEmpty()} ? ${o.specialInstructions} : '-'"></td>
+            <td th:text="'Rs. ' + ${#numbers.formatDecimal(o.price, 1, 2)}"></td>
+            <td>
+                <span class="status-badge" th:classappend="'status-' + ${o.status}" th:text="${o.status}"></span>
+            </td>
+            <td th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd')}"></td>
+            <td>
+                <form th:action="@{/admin/custom-orders/{id}/status(id=${o.id})}" method="post" style="display:flex;gap:6px;align-items:center;">
+                    <select name="status">
+                        <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}"
+                                th:selected="${s == o.status}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .search-bar { display:flex; gap:10px; margin-bottom:20px; }
+        .search-bar input { flex:1; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; }
+        .low-stock { background:#fff3cd; color:#856404; padding:3px 8px; border-radius:12px; font-size:12px; font-weight:600; }
+        .actions { display:flex; gap:8px; flex-wrap:wrap; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <span style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;">
+        <img th:src="@{/images/logo.png}" width="36" alt="logo" style="border-radius:50%;border:2px solid #F0C878;">
+        MC Bakers Admin
+    </span>
+    <button class="hamburger" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="navLinks">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/orders}">Orders</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/admin/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+    </div>
+    <div class="page-header-actions">
+        <h2>Products</h2>
+        <div class="page-actions">
+            <a th:href="@{/admin/product/add}" class="btn btn-primary">+ Add Product</a>
+        </div>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <form th:action="@{/admin/products}" method="get" class="search-bar">
+        <input type="text" name="search" th:value="${search}" placeholder="Search products...">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a th:if="${search}" th:href="@{/admin/products}" class="btn btn-secondary">Clear</a>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Image</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        <tr th:if="${products.isEmpty()}">
+            <td colspan="6" style="text-align:center;color:#888;">No products found.</td>
+        </tr>
+        <tr th:each="p : ${products}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.category}"> </td>
+            <td th:text="'Rs. ' + ${#numbers.formatDecimal(p.price, 1, 2)}"></td>
+            <td>
+                <span th:text="${p.stock}"></span>
+                <span th:if="${p.stock <= 5}" class="low-stock">Low</span>
+            </td>
+
+            <td>
+
+                <img th:src="@{/images/products/{img}(img=${p.image})}"
+
+                     th:alt="${p.name}"
+
+                     class="product-table-image"
+
+                     onerror="this.src='/images/default.svg'">
+
+            </td>
+
+
+            <td>
+                <div class="actions">
+                    <a th:href="@{/admin/product/edit/{id}(id=${p.id})}" class="btn btn-secondary btn-sm">Edit</a>
+                    <a th:href="@{/admin/product/delete/{id}(id=${p.id})}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this product?')">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>

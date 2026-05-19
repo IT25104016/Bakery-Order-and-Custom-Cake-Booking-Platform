@@ -1,0 +1,426 @@
+[INFO] Scanning for projects...
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml
+Progress (1): 249 B                   Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml (249 B at 384 B/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml
+Progress (1): 398 BProgress (2): 398 B | 375 B                           Downloaded from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml (375 B at 5.0 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml
+Progress (2): 398 B | 255 B                           Downloaded from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml (255 B at 336 B/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml
+Progress (2): 398 B | 394 B                           Downloaded from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml (394 B at 3.4 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml
+Progress (2): 398 B | 242 B                           Downloaded from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml (242 B at 1.8 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml
+Progress (2): 398 B | 4.6 kBProgress (2): 398 B | 9.7 kBProgress (2): 398 B | 14 kB                            Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml (14 kB at 172 kB/s)
+Progress (2): 398 B | 3.3 kBProgress (2): 398 B | 7.9 kBProgress (2): 398 B | 12 kB Progress (2): 398 B | 16 kBProgress (2): 398 B | 20 kBProgress (2): 398 B | 21 kB                           Downloaded from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml (398 B at 368 B/s)
+Progress (2): 21 kB | 234 B                           Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml (21 kB at 71 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml (234 B at 195 B/s)
+[INFO] 
+[INFO] ---------------------< com.bakery:BakeryPlatform >----------------------
+[INFO] Building BakeryPlatform 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ BakeryPlatform >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ BakeryPlatform ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 66 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ BakeryPlatform ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ BakeryPlatform ---
+[INFO] skip non existing resourceDirectory D:\Bakery\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ BakeryPlatform ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ BakeryPlatform <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ BakeryPlatform ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:05:11.037+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:05:11.042+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:05:11.083+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-17T12:05:11.084+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-05-17T12:05:11.674+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:05:11.743+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:05:12.207+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:05:12.214+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:05:12.214+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:05:12.252+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:05:12.253+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1168 ms
+2026-05-17T12:05:12.353+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:05:12.391+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2026-05-17T12:05:12.416+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:05:12.550+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:05:12.569+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-17T12:05:12.692+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7be018b6
+2026-05-17T12:05:12.693+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-17T12:05:12.729+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:05:13.438+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-17T12:05:13.520+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:05:13.749+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-17T12:05:14.183+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-17T12:05:14.385+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4feb6d04, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@54638e9f, org.springframework.security.web.context.SecurityContextHolderFilter@4ac45ce6, org.springframework.security.web.header.HeaderWriterFilter@5e93289d, org.springframework.web.filter.CorsFilter@48143aec, org.springframework.security.web.authentication.logout.LogoutFilter@2a9f5f96, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@72751f7c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@48aaee16, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@792ab564, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@253773c0, org.springframework.security.web.access.ExceptionTranslationFilter@53507c88, org.springframework.security.web.access.intercept.AuthorizationFilter@4b32a68]
+2026-05-17T12:05:14.544+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-05-17T12:05:14.567+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-17T12:05:14.574+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Started BakeryPlatformApplication in 3.837 seconds (process running for 4.174)
+? User[ADMIN]: Admin (admin@bakery.com) ? dashboard: /admin/dashboard
+? User[ADMIN]: Kavishka (admin1@bakery.com) ? dashboard: /admin/dashboard
+2026-05-17T12:05:39.429+05:30  INFO 26032 --- [BakeryPlatform] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 15 class path changes (0 additions, 15 deletions, 0 modifications)
+2026-05-17T12:05:39.445+05:30  INFO 26032 --- [BakeryPlatform] [       Thread-1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:05:39.450+05:30  INFO 26032 --- [BakeryPlatform] [       Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-17T12:05:39.456+05:30  INFO 26032 --- [BakeryPlatform] [       Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:05:39.515+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:05:39.516+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:05:39.653+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:05:39.667+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 4 JPA repository interfaces.
+2026-05-17T12:05:39.771+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:05:39.772+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:05:39.772+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:05:39.789+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:05:39.790+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 272 ms
+2026-05-17T12:05:39.841+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:05:39.844+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:05:39.848+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:05:39.850+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-05-17T12:05:39.854+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57904cd5
+2026-05-17T12:05:39.855+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-05-17T12:05:39.856+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:05:39.866+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/bakery/model/Order
+2026-05-17T12:05:39.866+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-05-17T12:05:39.867+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-05-17T12:05:39.868+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-05-17T12:05:39.878+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-17T12:05:39.898+05:30 ERROR 26032 --- [BakeryPlatform] [  restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/bakery/model/Order
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at com.bakery.BakeryPlatformApplication.main(BakeryPlatformApplication.java:9) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.2.0.jar:3.2.0]
+Caused by: java.lang.NoClassDefFoundError: com/bakery/model/Order
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3404) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2506) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:137) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:175) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:167) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:259) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:215) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:160) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:296) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:231) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:422) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:255) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:278) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:321) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	... 21 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.bakery.model.Order
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:469) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.2.0.jar:3.2.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[na:na]
+	... 45 common frames omitted
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:05:41.378+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:05:41.379+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:05:41.555+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:05:41.572+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:05:41.662+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:05:41.664+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:05:41.664+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:05:41.682+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:05:41.682+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 302 ms
+2026-05-17T12:05:41.715+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:05:41.719+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:05:41.723+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:05:41.724+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2026-05-17T12:05:41.728+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a83fe6b
+2026-05-17T12:05:41.728+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2026-05-17T12:05:41.729+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:05:41.844+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-17T12:05:41.896+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:05:42.112+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-17T12:05:42.164+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1d556200, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67e794, org.springframework.security.web.context.SecurityContextHolderFilter@7aebdf1d, org.springframework.security.web.header.HeaderWriterFilter@5f4c20b2, org.springframework.web.filter.CorsFilter@64eb0397, org.springframework.security.web.authentication.logout.LogoutFilter@36b1fd09, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@24359a3a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@71bc5737, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2cf137ff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6c07b17a, org.springframework.security.web.access.ExceptionTranslationFilter@7a24e691, org.springframework.security.web.access.intercept.AuthorizationFilter@cc9483]
+2026-05-17T12:05:42.198+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-05-17T12:05:42.207+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-17T12:05:42.210+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Started BakeryPlatformApplication in 0.851 seconds (process running for 31.809)
+? User[ADMIN]: Admin (admin@bakery.com) ? dashboard: /admin/dashboard
+? User[ADMIN]: Kavishka (admin1@bakery.com) ? dashboard: /admin/dashboard
+2026-05-17T12:05:42.229+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-05-17T12:11:41.052+05:30  INFO 26032 --- [BakeryPlatform] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2026-05-17T12:11:41.082+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-12] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:11:41.083+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-12] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2026-05-17T12:11:41.089+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-12] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:11:41.203+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:11:41.203+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:11:41.482+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:11:41.508+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:11:41.676+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:11:41.678+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:11:41.678+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:11:41.703+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:11:41.704+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 497 ms
+2026-05-17T12:11:41.750+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:11:41.754+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:11:41.758+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:11:41.759+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-05-17T12:11:41.765+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38f77c5e
+2026-05-17T12:11:41.765+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2026-05-17T12:11:41.767+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:11:41.774+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Truncated class file
+2026-05-17T12:11:41.775+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2026-05-17T12:11:41.777+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2026-05-17T12:11:41.778+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-05-17T12:11:41.783+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-17T12:11:41.786+05:30 ERROR 26032 --- [BakeryPlatform] [  restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Truncated class file
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) ~[spring-context-6.1.1.jar:6.1.1]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar:3.2.0]
+	at com.bakery.BakeryPlatformApplication.main(BakeryPlatformApplication.java:9) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.2.0.jar:3.2.0]
+Caused by: java.lang.ClassFormatError: Truncated class file
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method) ~[na:na]
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017) ~[na:na]
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150) ~[na:na]
+	at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:524) ~[na:na]
+	at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:427) ~[na:na]
+	at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:421) ~[na:na]
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712) ~[na:na]
+	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.findClass(RestartClassLoader.java:136) ~[spring-boot-devtools-3.2.0.jar:3.2.0]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:118) ~[spring-boot-devtools-3.2.0.jar:3.2.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3404) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2506) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:137) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:175) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:167) ~[hibernate-commons-annotations-6.0.6.Final.jar:6.0.6.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:259) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:215) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:160) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:296) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:231) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:422) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:255) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:278) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:321) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.3.1.Final.jar:6.3.1.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771) ~[spring-beans-6.1.1.jar:6.1.1]
+	... 21 common frames omitted
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:11:43.245+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:11:43.245+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:11:43.338+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:11:43.348+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:11:43.405+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:11:43.406+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:11:43.406+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:11:43.416+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:11:43.416+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 170 ms
+2026-05-17T12:11:43.436+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:11:43.438+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:11:43.440+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:11:43.440+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-05-17T12:11:43.445+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@240d0dd8
+2026-05-17T12:11:43.445+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-05-17T12:11:43.446+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:11:43.512+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-17T12:11:43.552+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:11:43.711+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-17T12:11:43.768+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@78f3fe1f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c8c09ca, org.springframework.security.web.context.SecurityContextHolderFilter@2d51ef19, org.springframework.security.web.header.HeaderWriterFilter@2ea0d52a, org.springframework.web.filter.CorsFilter@75ba6681, org.springframework.security.web.authentication.logout.LogoutFilter@75dfd988, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6118fca8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f1b3866, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39eb881b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53612922, org.springframework.security.web.access.ExceptionTranslationFilter@4fbd3d7b, org.springframework.security.web.access.intercept.AuthorizationFilter@6a807be9]
+2026-05-17T12:11:43.807+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-05-17T12:11:43.814+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-17T12:11:43.817+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Started BakeryPlatformApplication in 0.587 seconds (process running for 393.416)
+? User[ADMIN]: Admin (admin@bakery.com) ? dashboard: /admin/dashboard
+? User[ADMIN]: Kavishka (admin1@bakery.com) ? dashboard: /admin/dashboard
+? User[CUSTOMER]: Kavishka (kavishkasuneth@gmail.com) ? dashboard: /customer/products
+2026-05-17T12:11:43.959+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-05-17T12:12:10.723+05:30  INFO 26032 --- [BakeryPlatform] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2026-05-17T12:12:10.737+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-14] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:12:10.738+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2026-05-17T12:12:10.741+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:12:10.799+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:12:10.799+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:12:10.970+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:12:10.985+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:12:11.083+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:12:11.084+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:12:11.085+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:12:11.101+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:12:11.102+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 302 ms
+2026-05-17T12:12:11.145+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:12:11.148+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:12:11.151+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:12:11.152+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2026-05-17T12:12:11.156+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a88aa0c
+2026-05-17T12:12:11.157+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2026-05-17T12:12:11.158+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:12:11.259+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-17T12:12:11.328+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:12:11.519+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-17T12:12:11.580+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6be60256, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3b720271, org.springframework.security.web.context.SecurityContextHolderFilter@4c96d435, org.springframework.security.web.header.HeaderWriterFilter@bbc4d96, org.springframework.web.filter.CorsFilter@32ddfa46, org.springframework.security.web.authentication.logout.LogoutFilter@759586db, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@321cf990, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62a0bb40, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66e1fdde, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67d855f4, org.springframework.security.web.access.ExceptionTranslationFilter@7d7f3755, org.springframework.security.web.access.intercept.AuthorizationFilter@7b6e5900]
+2026-05-17T12:12:11.615+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-05-17T12:12:11.624+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-17T12:12:11.629+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Started BakeryPlatformApplication in 0.849 seconds (process running for 421.228)
+2026-05-17T12:12:11.630+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-05-17T12:12:13.055+05:30  INFO 26032 --- [BakeryPlatform] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2026-05-17T12:12:13.066+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-21] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:12:13.067+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2026-05-17T12:12:13.069+05:30  INFO 26032 --- [BakeryPlatform] [      Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-05-17T12:12:13.117+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Starting BakeryPlatformApplication using Java 17.0.19 with PID 26032 (D:\Bakery\target\classes started by ASUS in D:\Bakery)
+2026-05-17T12:12:13.117+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-05-17T12:12:13.224+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-17T12:12:13.239+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 7 JPA repository interfaces.
+2026-05-17T12:12:13.310+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-17T12:12:13.311+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-17T12:12:13.311+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-17T12:12:13.322+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-17T12:12:13.323+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 204 ms
+2026-05-17T12:12:13.345+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-17T12:12:13.349+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-17T12:12:13.351+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-17T12:12:13.351+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2026-05-17T12:12:13.355+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b654a5b
+2026-05-17T12:12:13.355+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2026-05-17T12:12:13.356+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-17T12:12:13.428+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-17T12:12:13.465+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-17T12:12:13.628+05:30  WARN 26032 --- [BakeryPlatform] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-17T12:12:13.681+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4e8f00fd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6eccf1bb, org.springframework.security.web.context.SecurityContextHolderFilter@3ffb0084, org.springframework.security.web.header.HeaderWriterFilter@1fac32c, org.springframework.web.filter.CorsFilter@4f27685c, org.springframework.security.web.authentication.logout.LogoutFilter@153eb1da, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2e5fd48d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ff027e6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25923417, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1f0c3689, org.springframework.security.web.access.ExceptionTranslationFilter@2dd8fa1d, org.springframework.security.web.access.intercept.AuthorizationFilter@6fb9ce70]
+2026-05-17T12:12:13.716+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-05-17T12:12:13.722+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-17T12:12:13.726+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] com.bakery.BakeryPlatformApplication     : Started BakeryPlatformApplication in 0.623 seconds (process running for 423.326)
+? User[ADMIN]: Admin (admin@bakery.com) ? dashboard: /admin/dashboard
+? User[ADMIN]: Kavishka (admin1@bakery.com) ? dashboard: /admin/dashboard
+2026-05-17T12:12:13.763+05:30  INFO 26032 --- [BakeryPlatform] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

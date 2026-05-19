@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <span style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;">
+        <img th:src="@{/images/logo.png}" width="36" alt="logo" style="border-radius:50%;border:2px solid #F0C878;">
+        MC Bakers Admin
+    </span>
+    <button class="hamburger" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="navLinks">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/products}">Products</a>
+        <a th:href="@{/admin/custom-orders}">Custom Orders</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-back-row">
+        <a th:href="@{/admin/dashboard}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+    </div>
+    <div class="page-header-actions">
+        <h2>Orders</h2>
+    </div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <table class="table">
+        <thead>
+        <tr><th>Order #</th><th>Customer</th><th>Order address</th><th>Total</th><th>Status</th><th>Payment</th><th>Date</th><th>Update</th></tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orders.isEmpty()}">
+            <td colspan="8" style="text-align:center;color:#888;">No orders found.</td>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="'#' + ${order.id}"></td>
+            <td th:text="${order.user != null ? order.user.name : 'Deleted User'}"></td>
+            <td th:text="${order.deliveryAddress != null and !#strings.isEmpty(#strings.trim(order.deliveryAddress)) ? order.deliveryAddress : 'Pickup'}"></td>
+            <td th:text="'Rs. ' + ${#numbers.formatDecimal(order.total, 1, 2)}"></td>
+            <td>
+                <span class="badge"
+                      th:classappend="${order.status.name() == 'Pending'} ? 'badge-pending' :
+                                     (${order.status.name() == 'Preparing'} ? 'badge-preparing' :
+                                     (${order.status.name() == 'Ready'} ? 'badge-ready' : 'badge-completed'))"
+                      th:text="${order.status}"></span>
+            </td>
+            <td th:text="${order.paymentMethod != null} ? ${order.paymentMethod.label} : '-'"></td>
+            <td th:text="${#temporals.format(order.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <form th:action="@{/admin/orders/{id}/status(id=${order.id})}" method="post" style="display:flex;gap:6px;align-items:center;">
+                    <select name="status">
+                        <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}"
+                                th:selected="${s == order.status}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>(function(){var b=document.getElementById('navToggle'),m=document.getElementById('navLinks');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})()</script>
+</body>
+</html>
