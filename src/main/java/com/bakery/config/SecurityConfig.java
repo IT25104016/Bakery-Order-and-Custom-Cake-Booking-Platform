@@ -1,0 +1,143 @@
+package com.bakery.config;
+
+import com.bakery.service.CustomUserDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(
+            CustomUserDetailsService userDetailsService
+    ) {
+
+        this.userDetailsService = userDetailsService;
+    }
+
+    // ── Password Encoder ───────────────────────────────────────
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+
+        return new BCryptPasswordEncoder();
+    }
+
+    // ── Authentication Manager ─────────────────────────────────
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration config
+    ) throws Exception {
+
+        return config.getAuthenticationManager();
+    }
+
+    // ── Security Filter Chain ──────────────────────────────────
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http)
+            throws Exception {
+
+        http
+
+                // ── Authorization ─────────────────────────────────
+                .authorizeHttpRequests(auth -> auth
+
+                        // Public Pages
+                        .requestMatchers(
+                                "/",
+                                "/login",
+                                "/register",
+                                "/verify-otp",
+                                "/resend-otp",
+                                "/forgot-password",
+                                "/reset-password",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**"
+                        ).permitAll()
+
+                        // Customer Pages
+                        .requestMatchers("/customer/**")
+                        .permitAll()
+
+                        // Admin Pages
+                        .requestMatchers("/admin/**")
+                        .hasRole("ADMIN")
+
+                        // Any Other Request
+                        .anyRequest()
+                        .authenticated()
+                )
+
+                // ── Login Configuration ───────────────────────────
+                .formLogin(form -> form
+
+                        .loginPage("/login")
+
+                        .loginProcessingUrl("/login")
+
+                        .usernameParameter("email")
+
+                        .passwordParameter("password")
+
+                        .successHandler((request,
+                                         response,
+                                         authentication) -> {
+
+                            var authorities =
+                                    authentication.getAuthorities();
+
+                            String role =
+                                    authorities.iterator()
+                                            .next()
+                                            .getAuthority();
+
+                            // Admin Redirect
+                            if (role.equals("ROLE_ADMIN")) {
+
+                                response.sendRedirect(
+                                        "/admin/dashboard"
+                                );
+
+                            } else {
+
+                                // Customer Redirect
+                                response.sendRedirect(
+                                        "/customer/products"
+                                );
+                            }
+                        })
+
+                        .failureUrl("/login?error=true")
+
+                        .permitAll()
+                )
+
+                // ── Logout ────────────────────────────────────────
+                .logout(logout -> logout
+
+                        .logoutUrl("/logout")
+
+                        .logoutSuccessUrl(
+                                "/login?logout=true"
+                        )
+
+                        .invalidateHttpSession(true)
+
+                        .permitAll()
+                )
+
+                // ── Disable CSRF ──────────────────────────────────
+                .csrf(csrf -> csrf.disable());
+
+        return http.build();
+    }
+}
