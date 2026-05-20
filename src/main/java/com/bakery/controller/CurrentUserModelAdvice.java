@@ -1,4 +1,5 @@
 package com.bakery.controller;
+//E
 
 import com.bakery.model.User;
 import com.bakery.service.UserService;
@@ -12,8 +13,9 @@ import java.util.Locale;
 @ControllerAdvice
 public class CurrentUserModelAdvice {
 
-    private final UserService userService;
+    private final UserService userService; //Association(CurrentUserModelAdvice has a userService)
 
+    //Dependency 
     public CurrentUserModelAdvice(UserService userService) {
         this.userService = userService;
     }
