@@ -1,30 +1,29 @@
-package com.bakery.model;
+//ordering ability - customer dashboard - customer welcome message
 
-import jakarta.persistence.*;
-import lombok.Data;
+package com.bakery.model; //represent database entities
+//IPMOE
+import jakarta.persistence.*; //database mapping
+import lombok.Data; //automatically generates getters and setters
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor; //
 
-/**
- * CustomerUser — Inheritance from User
- * Regular customer: browse products, place orders, custom cake orders
- */
 @Entity
 @DiscriminatorValue("CUSTOMER")
-@Data
+@Data //lombok 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+    
 public class CustomerUser extends User {
 
-    // ── Polymorphism: Override base class methods ──────────────
+    // Polymorphism
     @Override
     public String getRole() {
-        return "CUSTOMER";
+        return "CUSTOMER"; //Returns customer role
     }
 
     @Override
     public String getDashboardUrl() {
-        return "/customer/products";
+        return "/customer/products"; //Customer dashboard path
     }
 
     @Override
@@ -32,7 +31,7 @@ public class CustomerUser extends User {
         return "Welcome, " + getName() + "! Explore our fresh bakes!";
     }
 
-    // ── Customer-specific methods ──────────────────────────────
+    // Customer specific methods 
     public boolean canPlaceOrder() {
         return true;
     }
