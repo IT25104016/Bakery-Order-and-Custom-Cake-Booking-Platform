@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+// SERVICE LAYER
+// OOP CONCEPT: ENCAPSULATION + ABSTRACTION
 @Service
 public class ProductService {
 
@@ -17,11 +19,11 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
+     // GET ALL PRODUCTS
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
-
+     // GET AVAILABLE PRODUCTS (STOCK > 0)
     public List<Product> getAvailableProducts() {
         return productRepository.findAll().stream()
                 .filter(product -> product.getStock() > 0)
@@ -31,7 +33,7 @@ public class ProductService {
     public Optional<Product> findById(int id) {
         return productRepository.findById(id);
     }
-
+     // SAVE NEW PRODUCT=============================
     public Product saveProduct(
 
             String name,
@@ -69,9 +71,10 @@ public class ProductService {
 
 
 
-
+     // UPDATE PRODUCT
     public Product updateProduct(int id, String name, double price, int stock, String image) {
         Product product = productRepository.findById(id).orElseThrow();
+          // Update values
         product.setName(name);
         product.setPrice(price);
         product.setStock(stock);
@@ -82,7 +85,7 @@ public class ProductService {
     }
 
 
-
+       // SEARCH PRODUCTS (ALL)
     public List<Product> searchAll(String keyword) {
         String query = keyword.toLowerCase();
         return productRepository.findAll().stream()
@@ -91,7 +94,7 @@ public class ProductService {
     }
 
 
-
+     // SEARCH ONLY AVAILABLE PRODUCTS
     public List<Product> searchAvailable(String keyword) {
         String query = keyword.toLowerCase();
         return getAvailableProducts().stream()
@@ -99,19 +102,19 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-
+      // FILTER BY CATEGORY + AVAILABLE STOCK
     public List<Product> getByCategory(
             ProductCategory category
     ) {
 
         return productRepository.findAll()
                 .stream()
-
+                 // filter by category
                 .filter(product ->
                         product.getCategory()
                                 == category
                 )
-
+                   // filter by stock availability
                 .filter(product ->
                         product.getStock() > 0
                 )
@@ -119,13 +122,13 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-
+     // LOW STOCK PRODUCTS (<= 5)
     public List<Product> getAllLowStock() {
         return productRepository.findAll().stream()
                 .filter(product -> product.getStock() <= 5)
                 .collect(Collectors.toList());
     }
-
+      // DELETE PRODUCT
     public void deleteProduct(int id) {
         productRepository.deleteById(id);
     }
@@ -133,7 +136,7 @@ public class ProductService {
     public void delete(Long id) {
         productRepository.deleteById(id.intValue());
     }
-
+      // COUNT PRODUCTS
     public long count() {
         return productRepository.count();
     }
