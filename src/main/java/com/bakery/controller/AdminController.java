@@ -24,12 +24,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/admin")//All URLs in this controller start with/admin
 public class AdminController {
 
-    private final UserService userService;//Encapsulation
+    private final UserService userService;//Association relation
     private final ProductService productService;
     private final OrderService orderService;
     private final ImageUploadService imageUploadService;
 
-    public AdminController(UserService userService,
+    public AdminController(UserService userService,//AdminController HAS-A UserService(Composition)internally services hold
                            ProductService productService,
                            OrderService orderService,
                            ImageUploadService imageUploadService) {
