@@ -23,7 +23,7 @@ public class ProductRatingController {
     private final ProductRatingService ratingService;
     private final ProductService productService;
     private final UserService userService;
-
+     // Constructor Injection (Spring automatically injects objects)
     public ProductRatingController(ProductRatingService ratingService,
                                    ProductService productService,
                                    UserService userService) {
@@ -56,6 +56,7 @@ public class ProductRatingController {
         model.addAttribute("ratingCount",ratingService.getRatingCount(product));
         return "customer/product-detail";
     }
+     // DELETE RATING
     @PostMapping("/delete")
     public String deleteRating(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -72,7 +73,8 @@ public class ProductRatingController {
                 userService.findByEmail(
                         userDetails.getUsername()
                 ).orElseThrow();
-
+         // Delete rating using service layer
+        // OOP: ABSTRACTION (business logic hidden)
         ratingService.deleteRating(
                 user.getId(),
                 productId
@@ -96,6 +98,7 @@ public class ProductRatingController {
                                RedirectAttributes ra) {
         User user       = getCurrentUser(ud);
         Product product = productService.findById(productId).orElseThrow();
+          // Save rating (create or update)
         ratingService.submitRating(user, product, stars, review);
         ra.addFlashAttribute("success", "thank you for submitting Rating! ");
         return "redirect:/customer/rating/product/" + productId;
