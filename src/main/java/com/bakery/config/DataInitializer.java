@@ -28,6 +28,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         allowDeletedUsersInOrderHistory();
+        allowUpdatedOrderStatuses();
 
         String adminEmail = System.getenv().getOrDefault("DEFAULT_ADMIN_EMAIL", "admin@bakery.com");
         String adminPassword = System.getenv().getOrDefault("DEFAULT_ADMIN_PASSWORD", "admin123");
@@ -47,11 +48,11 @@ public class DataInitializer implements CommandLineRunner {
             if (pwd != null && !pwd.startsWith("$2")) {
                 user.setPassword(passwordEncoder.encode(pwd));
                 userRepository.save(user);
-                System.out.println("✅ Password migrated: " + user.getEmail());
+                System.out.println(" Password migrated: " + user.getEmail());
             }
 
             // ── Polymorphism demo in logs ──────────────────────
-            System.out.println("🔑 " + user.getDisplayInfo()
+            System.out.println(" " + user.getDisplayInfo()
                     + " → dashboard: " + user.getDashboardUrl());
         }
     }
@@ -59,5 +60,10 @@ public class DataInitializer implements CommandLineRunner {
     private void allowDeletedUsersInOrderHistory() {
         jdbcTemplate.execute("ALTER TABLE orders MODIFY COLUMN user_id INT NULL");
         jdbcTemplate.execute("ALTER TABLE custom_orders MODIFY COLUMN user_id INT NULL");
+    }
+
+    private void allowUpdatedOrderStatuses() {
+        jdbcTemplate.execute("ALTER TABLE orders MODIFY COLUMN status VARCHAR(20) NOT NULL");
+        jdbcTemplate.execute("ALTER TABLE custom_orders MODIFY COLUMN status VARCHAR(20) NOT NULL");
     }
 }
