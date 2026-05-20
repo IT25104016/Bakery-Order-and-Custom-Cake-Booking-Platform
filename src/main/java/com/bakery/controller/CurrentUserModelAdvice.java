@@ -1,5 +1,7 @@
+//automatically sends logged-in user details to all frontend pages.
+////E
+
 package com.bakery.controller;
-//E
 
 import com.bakery.model.User;
 import com.bakery.service.UserService;
