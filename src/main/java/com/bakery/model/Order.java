@@ -48,7 +48,11 @@ public class Order {
     private List<OrderItem> items;
 
     public enum Status {
-        Pending, Preparing, Ready, Completed
+        Pending, Preparing, Ready, Completed, Cancelled;
+
+        public boolean isCustomerCancellable() {
+            return this == Pending;
+        }
     }
 
     public enum PaymentMethod {
