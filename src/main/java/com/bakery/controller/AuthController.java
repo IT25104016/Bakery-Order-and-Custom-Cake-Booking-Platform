@@ -1,3 +1,4 @@
+//171 - Create | 77 - Read
 package com.bakery.controller;
 
 import com.bakery.service.OtpService;
@@ -74,7 +75,7 @@ public class AuthController {
                            HttpSession session,
                            RedirectAttributes ra) {
 
-        // Email already exists
+        // READ - Email already exists
         if (userService.existsByEmail(email)) {
 
             ra.addFlashAttribute(
@@ -82,7 +83,7 @@ public class AuthController {
                     "This email is already registered."
             );
 
-            return "redirect:/register";
+            return "redirect:/register"; //return to the register page
         }
 
         // Save temporary session data
@@ -92,7 +93,7 @@ public class AuthController {
 
         session.setAttribute("pending_password", password);
 
-        // Send OTP
+        // EXEPTION HANDLING - Send OTP
         try {
 
             otpService.sendOtp(email);
@@ -168,14 +169,13 @@ public class AuthController {
             return "redirect:/verify-otp";
         }
 
-        // Create user
+        // CREATE 
         userService.registerCustomer(
                 name,
                 email,
                 password
         );
-
-        // Clear session
+ 
         session.removeAttribute("pending_name");
         session.removeAttribute("pending_email");
         session.removeAttribute("pending_password");
