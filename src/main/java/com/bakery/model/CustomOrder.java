@@ -1,31 +1,31 @@
 package com.bakery.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.*;//used for DB mapping
+import lombok.Data;// automatically creates getters setters and constructors
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-@Entity
+//JPA(No need to manually write sql) entity used connect the java class to the data base
+@Entity // data entity table
 @Table(name = "custom_orders")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CustomOrder {
+@NoArgsConstructor // empty constructor
+@AllArgsConstructor // constructor with fields
+public class CustomOrder {// aggreagtion(CustomerOrder has a user)
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // automatically genereates id
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)//one user can do manys orders(lazy - fetch user only when needed)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;// aggregation
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false)//compulsory to be filled
     private CakeSize size;
 
     @Enumerated(EnumType.STRING)
@@ -41,7 +41,7 @@ public class CustomOrder {
     @Column(name = "special_instructions", length = 500)
     private String specialInstructions;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)// stores the enum as texts in the DB
     @Column(nullable = false)
     private CustomOrderStatus status = CustomOrderStatus.Pending;
 
@@ -55,11 +55,11 @@ public class CustomOrder {
     // ── Enums ──────────────────────────────────────────────────
 
     public enum CakeSize {
-        Small, Medium, Large;
+        Small, Medium, Large;// enum values
 
         public double getBasePrice() {
             return switch (this) {
-                case Small  -> 1200.00;
+                case Small  -> 1200.00;// arrow key is used instead of the if
                 case Medium -> 2200.00;
                 case Large  -> 3500.00;
             };
