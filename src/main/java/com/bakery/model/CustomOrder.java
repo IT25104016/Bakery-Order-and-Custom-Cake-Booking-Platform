@@ -1,30 +1,37 @@
+//used for DB mapping
 package com.bakery.model;
 
 import jakarta.persistence.*;//used for DB mapping
-import lombok.Data;// automatically creates getters setters and constructors
+
+// automatically creates getters setters and constructors
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 //JPA(No need to manually write sql) entity used connect the java class to the data base
 @Entity // data entity table
 @Table(name = "custom_orders")
+
 @Data
 @NoArgsConstructor // empty constructor
 @AllArgsConstructor // constructor with fields
+
 public class CustomOrder {// aggreagtion(CustomerOrder has a user)
 
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // automatically genereates id
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)//one user can do manys orders(lazy - fetch user only when needed)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)//one user can do many orders(lazy - fetch user only when needed)
     @JoinColumn(name = "user_id")
     private User user;// aggregation
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)// stores enum values as text in DB
     @Column(nullable = false)//compulsory to be filled
     private CakeSize size;
 
@@ -48,17 +55,20 @@ public class CustomOrder {// aggreagtion(CustomerOrder has a user)
     @Column(nullable = false)
     private double price;
 
-    @CreationTimestamp
+    @CreationTimestamp // automatically stores created date and time
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     // ── Enums ──────────────────────────────────────────────────
 
     public enum CakeSize {
+
         Small, Medium, Large;// enum values
 
         public double getBasePrice() {
+
             return switch (this) {
+
                 case Small  -> 1200.00;// arrow key is used instead of the if
                 case Medium -> 2200.00;
                 case Large  -> 3500.00;
@@ -66,7 +76,9 @@ public class CustomOrder {// aggreagtion(CustomerOrder has a user)
         }
 
         public String getLabel() {
+
             return switch (this) {
+
                 case Small  -> "Small (500g) - Rs. 1,200";
                 case Medium -> "Medium (1kg) - Rs. 2,200";
                 case Large  -> "Large (2kg) - Rs. 3,500";
@@ -75,10 +87,13 @@ public class CustomOrder {// aggreagtion(CustomerOrder has a user)
     }
 
     public enum CakeFlavor {
+
         Chocolate, Vanilla, RedVelvet, Strawberry, Caramel, BlackForest;
 
         public String getLabel() {
+
             return switch (this) {
+
                 case Chocolate   -> "Chocolate";
                 case Vanilla     -> "Vanilla";
                 case RedVelvet   -> "Red Velvet";
@@ -90,6 +105,14 @@ public class CustomOrder {// aggreagtion(CustomerOrder has a user)
     }
 
     public enum CustomOrderStatus {
-        Pending, Confirmed, Baking, Ready, Completed, Cancelled
+
+        Pending, Confirmed, Baking, Ready, Completed, Cancelled;
+
+        //checks whether the customer can cancel the order
+        public boolean isCustomerCancellable() {
+
+            //only pending and confirmed orders can be cancelled
+            return this == Pending || this == Confirmed;
+        }
     }
 }
