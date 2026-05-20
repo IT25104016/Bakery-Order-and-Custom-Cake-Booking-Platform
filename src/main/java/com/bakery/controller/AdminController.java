@@ -38,7 +38,7 @@ public class AdminController {
         this.orderService = orderService;
         this.imageUploadService = imageUploadService;
     }
-
+    //oop cocept constructor
     @GetMapping("/dashboard")
     public String dashboard(@AuthenticationPrincipal UserDetails userDetails,
                             Model model) {
@@ -186,7 +186,7 @@ public class AdminController {
     }
 
 
-
+    //Add product
     @PostMapping("/product/edit/{id}")
     public String editProduct(@PathVariable int id,
                               @RequestParam String name,
@@ -195,6 +195,7 @@ public class AdminController {
                               @RequestParam(required = false) MultipartFile imageFile,
                               RedirectAttributes redirectAttributes) {
         Product existing = productService.findById(id).orElseThrow();
+        // Handle image upload (delegation → OOP Abstraction)
         String filename = resolveImage(imageFile, existing.getImage(), redirectAttributes);
         if (filename == null) {
             return "redirect:/admin/product/edit/" + id;
@@ -228,7 +229,7 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("success", "Order status updated successfully!");
         return "redirect:/admin/orders";
     }
-
+   //image handling
     private String resolveImage(MultipartFile file, String existingImage, RedirectAttributes redirectAttributes) {
         if (file == null || file.isEmpty()) {
             return existingImage != null && !existingImage.isBlank() ? existingImage : "default.svg";
