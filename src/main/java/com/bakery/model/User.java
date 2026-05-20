@@ -1,5 +1,5 @@
 package com.bakery.model;
-//IARPwMOE
+//IARPwMOE.
 
 import jakarta.persistence.*; //Used for database mapping
 import lombok.Data; //automatically creates getters and setters 
