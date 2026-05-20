@@ -4,14 +4,14 @@ import com.bakery.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;//Used to configure authentication settings.
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;//Used to configure HTTP security rules.
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;//This class indicates that it is a configuration class.
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;//Imports BCrypt password hashing algorithm.
+import org.springframework.security.crypto.password.PasswordEncoder;//Imports the PasswordEncoder interface.
+import org.springframework.security.web.SecurityFilterChain;//Used to configure the security filter chain.
 
-@Configuration
+@Configuration//Marks this class as a Spring configuration class.
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -28,7 +28,7 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
 
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();//Passwords are securely hashed before saving to the database.
     }
 
     // ── Authentication Manager ─────────────────────────────────
