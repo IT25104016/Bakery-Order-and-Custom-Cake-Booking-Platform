@@ -1,11 +1,12 @@
 package com.bakery.model;
+//IARPwMOE
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*; //Used for database mapping
+import lombok.Data; //automatically creates getters and setters 
+import lombok.NoArgsConstructor; //automatically creates default constructors
 
 
-@Entity
+@Entity //marks this class as a db entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
@@ -29,12 +30,12 @@ public abstract class User {
     @Column(name = "profile_pic", length = 100)
     private String profilePic;
 
-    // ── Polymorphic methods — each subclass overrides differently ──
+    // Polymorphic methods
     public abstract String getRole();
     public abstract String getDashboardUrl();
     public abstract String getWelcomeMessage();
 
-    // ── Common method used by all subclasses ───────────────────────
+    // Common method used by all subclasses 
     public String getDisplayInfo() {
         return "User[" + getRole() + "]: " + name + " (" + email + ")";
     }
