@@ -1,5 +1,5 @@
 package com.bakery.model;
-
+// inherit from the parent
 import java.time.LocalDate;
 
 public class CustomCakeOrder extends CakeOrder {
@@ -18,11 +18,11 @@ public class CustomCakeOrder extends CakeOrder {
         this.customMessage = customMessage;
         this.deliveryDate = deliveryDate;
     }
-
+//method overriding
     @Override
     public double calculatePrice() {
         return size.getBasePrice();
-    }
+    }// calculate the proze based on size
 
     @Override
     public String getOrderType() {
