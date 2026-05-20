@@ -20,16 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
-@RequestMapping("/admin")
+@Controller//A controller handles HTTP requests and returns responses/views.(Marks this class as a Spring MVC controlle)
+@RequestMapping("/admin")//All URLs in this controller start with/admin
 public class AdminController {
 
-    private final UserService userService;
+    private final UserService userService;//Association relation
     private final ProductService productService;
     private final OrderService orderService;
     private final ImageUploadService imageUploadService;
 
-    public AdminController(UserService userService,
+    public AdminController(UserService userService,//AdminController HAS-A UserService(Composition)internally services hold
                            ProductService productService,
                            OrderService orderService,
                            ImageUploadService imageUploadService) {
@@ -81,15 +81,15 @@ public class AdminController {
             RedirectAttributes redirectAttributes
 
     ) {
-
+   //Exception Handling
         try {
 
             User user =
                     userService.findById(id)
                             .orElseThrow(() -> new IllegalStateException("User not found."));
 
-            User currentUser =
-                    userService.findByEmail(userDetails.getUsername())
+            User currentUser = //Inheritance
+                    userService.findByEmail(userDetails.getUsername())//Polymorphism
                             .orElseThrow(() -> new IllegalStateException("Current admin account not found."));
 
             if (!userService.canDeleteUser(currentUser, user)) {
@@ -284,8 +284,13 @@ public class AdminController {
     public String updateOrderStatus(@PathVariable int id,
                                     @RequestParam String status,
                                     RedirectAttributes redirectAttributes) {
-        orderService.updateStatus(id, Order.Status.valueOf(status));
-        redirectAttributes.addFlashAttribute("success", "Order status updated successfully!");
+        try {
+            orderService.updateStatus(id, Order.Status.valueOf(status));
+            redirectAttributes.addFlashAttribute("success", "Order status updated successfully!");
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
         return "redirect:/admin/orders";
     }
 
