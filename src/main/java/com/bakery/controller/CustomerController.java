@@ -612,11 +612,11 @@ public class CustomerController {
         return "redirect:/customer/profile";
     }
 
-    // ── Delete Profile Picture ─────────────────────────────────
+    // DELETE
     @PostMapping("/profile/delete-pic")
     public String deleteProfilePic(
-            @AuthenticationPrincipal UserDetails userDetails,
-            RedirectAttributes redirectAttributes
+            @AuthenticationPrincipal UserDetails userDetails, //Gets currently logged-in user details from Spring Security
+            RedirectAttributes redirectAttributes //send temporary success/error messages after redirect
     ) {
 
         if (userDetails == null) {
