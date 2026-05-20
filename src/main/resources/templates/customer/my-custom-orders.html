@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
@@ -37,6 +37,8 @@
             <a th:href="@{/customer/custom-order}" class="btn btn-primary">+ New Custom Order</a>
         </div>
     </div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
     <div th:if="${orders.isEmpty()}" class="empty-cart">
         <p>No custom orders yet.</p>
@@ -49,7 +51,7 @@
                 <tr>
                     <th>Order #</th><th>Size & Flavor</th>
                     <th>Message</th><th>Delivery Date</th><th>Notes</th>
-                    <th>Price</th><th>Status</th><th>Ordered On</th>
+                    <th>Price</th><th>Status</th><th>Ordered On</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +71,15 @@
                               th:text="${o.status}"></span>
                     </td>
                     <td th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd')}"></td>
+                    <td>
+                        <form th:if="${o.status.customerCancellable}"
+                              th:action="@{/customer/custom-order/{id}/cancel(id=${o.id})}"
+                              method="post"
+                              onsubmit="return confirm('Cancel this custom order?')">
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                        </form>
+                        <span th:unless="${o.status.customerCancellable}" class="detail-cell">-</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
