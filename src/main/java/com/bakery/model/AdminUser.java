@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * Has full system access: manage products, users, and all orders.
  */
 @Entity
-@DiscriminatorValue("ADMIN")
+@DiscriminatorValue("ADMIN")//This identifier means that this class belongs to the ADMIN type in the database.
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
