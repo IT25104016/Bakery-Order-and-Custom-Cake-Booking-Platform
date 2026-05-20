@@ -39,7 +39,7 @@ public class AdminController {
         this.imageUploadService = imageUploadService;
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/dashboard")//Handles HTTP GET requests
     public String dashboard(@AuthenticationPrincipal UserDetails userDetails,
                             Model model) {
         model.addAttribute("totalProducts", productService.count());
