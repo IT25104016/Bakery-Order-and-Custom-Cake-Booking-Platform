@@ -1,3 +1,5 @@
+// 75 - UPDATE
+
 package com.bakery.controller;
 
 import com.bakery.model.PasswordResetToken;
@@ -13,8 +15,9 @@ import java.util.Optional;
 @Controller
 public class PasswordResetController {
 
-    private final PasswordResetService passwordResetService;
+    private final PasswordResetService passwordResetService; //Association
 
+    //dependency
     public PasswordResetController(PasswordResetService passwordResetService) {
         this.passwordResetService = passwordResetService;
     }
@@ -70,6 +73,7 @@ public class PasswordResetController {
             return "redirect:/reset-password?token=" + token;
         }
 
+        //UPDATE - password reset
         boolean success = passwordResetService.resetPassword(token, newPassword);
         if (success) {
             ra.addFlashAttribute("passwordReset", "Your password has been successfully reset! Please log in.\n");
