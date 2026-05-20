@@ -13,6 +13,11 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByUserOrderByIdDesc(User user);
+    @Query("select distinct o from Order o " +
+            "left join fetch o.user " +
+            "left join fetch o.items i " +
+            "left join fetch i.product " +
+            "order by o.id desc")
     List<Order> findAllByOrderByIdDesc();
     boolean existsByUserId(int userId);
 
