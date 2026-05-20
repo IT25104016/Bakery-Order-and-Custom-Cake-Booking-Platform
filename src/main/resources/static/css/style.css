@@ -972,6 +972,12 @@ a:focus {
     border: 1px solid #C8C6C8;
 }
 
+.badge-cancelled {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F1AEB5;
+}
+
 /* Alerts */
 .alert {
     padding: 13px 18px;
@@ -1977,5 +1983,4 @@ a:focus {
        box-shadow:
                0 4px 10px rgba(0,0,0,.08);
    }
-
 
