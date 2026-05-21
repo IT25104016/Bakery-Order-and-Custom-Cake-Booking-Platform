@@ -57,7 +57,7 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-```java id="q8mnp4"
+
 @GetMapping("/profile") // Handles request for loading admin profile page
 public String profilePage(@AuthenticationPrincipal UserDetails userDetails,
                           Model model) {
