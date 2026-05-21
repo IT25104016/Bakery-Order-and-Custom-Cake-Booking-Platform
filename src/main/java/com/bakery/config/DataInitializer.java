@@ -25,21 +25,37 @@ public class DataInitializer implements CommandLineRunner {//(abstraction).
         this.jdbcTemplate    = jdbcTemplate;//execute sql
     }
 
-    @Override
-    public void run(String... args) {
-        allowDeletedUsersInOrderHistory();
-        allowUpdatedOrderStatuses();
+   @Override
+public void run(String... args) {
 
-        String adminEmail = System.getenv().getOrDefault("DEFAULT_ADMIN_EMAIL", "admin@bakery.com");
-        String adminPassword = System.getenv().getOrDefault("DEFAULT_ADMIN_PASSWORD", "admin123");
-        if (!userRepository.existsByEmail(adminEmail)) {
-            AdminUser admin = new AdminUser();
-            admin.setName("Administrator");
-            admin.setEmail(adminEmail);
-            admin.setPassword(passwordEncoder.encode(adminPassword));
-            userRepository.save(admin);
-            System.out.println("Default admin created: " + adminEmail);
-        }
+    // Update database settings
+    allowDeletedUsersInOrderHistory();
+    allowUpdatedOrderStatuses();
+
+    // Get default admin email and password
+    String adminEmail = System.getenv().getOrDefault("DEFAULT_ADMIN_EMAIL", "admin@bakery.com");
+    String adminPassword = System.getenv().getOrDefault("DEFAULT_ADMIN_PASSWORD", "admin123");
+
+    // Check if admin already exists
+    if (!userRepository.existsByEmail(adminEmail)) {
+
+        // Create new admin object
+        AdminUser admin = new AdminUser();
+
+        // Set admin details
+        admin.setName("Administrator");
+        admin.setEmail(adminEmail);
+
+        // Encrypt password before saving
+        admin.setPassword(passwordEncoder.encode(adminPassword));
+
+        // Save admin to database
+        userRepository.save(admin);
+
+        // Print success message
+        System.out.println("Default admin created: " + adminEmail);
+    }
+}
 
         List<User> users = userRepository.findAll();
         for (User user : users) {
