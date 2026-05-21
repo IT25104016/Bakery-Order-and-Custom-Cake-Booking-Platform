@@ -619,7 +619,8 @@ public class CustomerController {
             RedirectAttributes redirectAttributes //send temporary success/error messages after redirect
     ) {
 
-        if (userDetails == null) {
+        // Prevents unauthorized users from deleting profile pictures
+        if (userDetails == null) { 
 
             return "redirect:/login";
         }
