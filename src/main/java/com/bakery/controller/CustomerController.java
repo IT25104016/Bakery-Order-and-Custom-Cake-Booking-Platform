@@ -628,7 +628,7 @@ public class CustomerController {
         User user =
                 getCurrentUser(userDetails);
 
-        userService.deleteProfilePic(user.getId());
+        userService.deleteProfilePic(user.getId()); //the controller gets the currently logged-in user
 
         redirectAttributes.addFlashAttribute(
                 "success",
