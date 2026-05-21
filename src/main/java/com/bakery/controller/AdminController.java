@@ -11,14 +11,14 @@ import com.bakery.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;// Used to send data from controller to frontend view
+import org.springframework.web.bind.annotation.GetMapping;// Handles HTTP GET requests
+import org.springframework.web.bind.annotation.PathVariable;// Gets values from URL path
+import org.springframework.web.bind.annotation.PostMapping;// Handles HTTP POST requests
+import org.springframework.web.bind.annotation.RequestMapping;// Defines base URL mapping for controller
+import org.springframework.web.bind.annotation.RequestParam;// Gets form/request parameter values
+import org.springframework.web.multipart.MultipartFile;// Used for file uploads
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;// Used for sending flash messages during redirects
 
 @Controller//A controller handles HTTP requests and returns responses/views.(Marks this class as a Spring MVC controlle)
 @RequestMapping("/admin")//All URLs in this controller start with/admin
@@ -57,260 +57,366 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-    @GetMapping("/profile")
-    public String profilePage(@AuthenticationPrincipal UserDetails userDetails,
-                              Model model) {
-        User user = getCurrentAdmin(userDetails);
-        model.addAttribute("user", user);
-        model.addAttribute("currentUser", user.getName());
-        return "admin/profile";
-    }
+```java id="q8mnp4"
+@GetMapping("/profile") // Handles request for loading admin profile page
+public String profilePage(@AuthenticationPrincipal UserDetails userDetails,
+                          Model model) {
 
-    @PostMapping("/profile")
-    public String updateProfile(@AuthenticationPrincipal UserDetails userDetails,
-                                @RequestParam String name,
-                                @RequestParam(required = false) String newPassword,
-                                @RequestParam(required = false) MultipartFile profilePicFile,
-                                RedirectAttributes redirectAttributes) {
-        User user = getCurrentAdmin(userDetails);
+    // Get currently logged-in admin user
+    User user = getCurrentAdmin(userDetails);
 
-        userService.updateProfile(user.getId(), name, newPassword);
+    // Send user object to frontend
+    model.addAttribute("user", user);
 
-        if (profilePicFile != null && !profilePicFile.isEmpty()) {
-            try {
-                userService.updateProfilePic(user.getId(), profilePicFile);
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute(
-                        "error",
-                        "Profile pic upload failed: " + e.getMessage()
-                );
-                return "redirect:/admin/profile";
-            }
-        }
+    // Send current user's name separately
+    model.addAttribute("currentUser", user.getName());
 
-        redirectAttributes.addFlashAttribute(
-                "success",
-                "Profile updated successfully!"
-        );
+    // Return profile page
+    return "admin/profile";
+}
 
-        return "redirect:/admin/profile";
-    }
+@PostMapping("/profile") // Handles profile update form submission
+public String updateProfile(@AuthenticationPrincipal UserDetails userDetails,
+                            @RequestParam String name,
+                            @RequestParam(required = false) String newPassword,
+                            @RequestParam(required = false) MultipartFile profilePicFile,
+                            RedirectAttributes redirectAttributes) {
 
-    @GetMapping("/users")
-    public String viewUsers(@AuthenticationPrincipal UserDetails userDetails,
-                            Model model) {
-        User currentUser = userService.findByEmail(userDetails.getUsername())
-                .orElse(null);
+    // Get currently logged-in admin user
+    User user = getCurrentAdmin(userDetails);
 
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("currentAdminIsMain", userService.isMainAdmin(currentUser));
-        model.addAttribute("mainAdminId", UserService.MAIN_ADMIN_ID);
-        model.addAttribute("mainAdminEmail", UserService.MAIN_ADMIN_EMAIL);
-        return "admin/users";
-    }
+    // Update name and password
+    userService.updateProfile(user.getId(), name, newPassword);
 
+    // Check whether profile picture file exists
+    if (profilePicFile != null && !profilePicFile.isEmpty()) {
 
-    @GetMapping("/user/delete/{id}")
-    public String deleteUser(
-
-            @AuthenticationPrincipal UserDetails userDetails,
-
-            @PathVariable int id,
-
-            RedirectAttributes redirectAttributes
-
-    ) {
-   //Exception Handling
         try {
 
-            User user =
-                    userService.findById(id)
-                            .orElseThrow(() -> new IllegalStateException("User not found."));
+            // Upload and update profile picture
+            userService.updateProfilePic(user.getId(), profilePicFile);
 
-            User currentUser = //Inheritance
-                    userService.findByEmail(userDetails.getUsername())//Polymorphism
-                            .orElseThrow(() -> new IllegalStateException("Current admin account not found."));
+        } catch (Exception e) {
 
-            if (!userService.canDeleteUser(currentUser, user)) {
-
-                redirectAttributes.addFlashAttribute(
-
-                        "error",
-
-                        getDeleteDeniedMessage(currentUser, user)
-                );
-
-                return "redirect:/admin/users";
-            }
-
-            userService.deleteUser(id);
-
+            // Show error message if upload fails
             redirectAttributes.addFlashAttribute(
-
-                    "success",
-
-                    "User deleted successfully!"
+                    "error",
+                    "Profile pic upload failed: " + e.getMessage()
             );
 
+            // Redirect back to profile page
+            return "redirect:/admin/profile";
         }
+    }
 
-        catch (IllegalStateException e) {
+    // Show success message after update
+    redirectAttributes.addFlashAttribute(
+            "success",
+            "Profile updated successfully!"
+    );
 
+    // Redirect back to profile page
+    return "redirect:/admin/profile";
+}
+
+
+
+  
+@GetMapping("/users") // Handles request for viewing all users
+public String viewUsers(@AuthenticationPrincipal UserDetails userDetails,
+                        Model model) {
+
+    // Get currently logged-in user using email/username
+    User currentUser = userService.findByEmail(userDetails.getUsername())
+            .orElse(null);
+
+    // Send all users list to the frontend page
+    model.addAttribute("users", userService.getAllUsers());
+
+    // Check whether current admin is the main admin
+    model.addAttribute("currentAdminIsMain", userService.isMainAdmin(currentUser));
+
+    // Send main admin ID to the frontend
+    model.addAttribute("mainAdminId", UserService.MAIN_ADMIN_ID);
+
+    // Send main admin email to the frontend
+    model.addAttribute("mainAdminEmail", UserService.MAIN_ADMIN_EMAIL);
+
+    // Return admin users page
+    return "admin/users";
+}
+
+
+
+
+ 
+@GetMapping("/user/delete/{id}") // Handles GET request for deleting a user by ID
+public String deleteUser(
+
+        @AuthenticationPrincipal UserDetails userDetails, // Gets currently logged-in user's details
+
+        @PathVariable int id, // Gets user ID from URL path
+
+        RedirectAttributes redirectAttributes // Used to send success/error messages after redirect
+
+) {
+
+    try {
+
+        // Find the user that needs to be deleted
+        User user =
+                userService.findById(id)
+                        .orElseThrow(() -> new IllegalStateException("User not found."));
+
+        // Find the currently logged-in admin user
+        User currentUser =
+                userService.findByEmail(userDetails.getUsername())
+                        .orElseThrow(() -> new IllegalStateException("Current admin account not found."));
+
+        // Check whether the current admin is allowed to delete this user
+        if (!userService.canDeleteUser(currentUser, user)) {
+
+            // Add error message if deletion is not allowed
             redirectAttributes.addFlashAttribute(
 
                     "error",
 
-                    e.getMessage()
+                    getDeleteDeniedMessage(currentUser, user)
             );
+
+            // Redirect back to admin users page
+            return "redirect:/admin/users";
         }
 
-        return "redirect:/admin/users";
-    }
+        // Delete the selected user
+        userService.deleteUser(id);
 
-
-
-    @GetMapping("/products")
-    public String viewProducts(@RequestParam(required = false) String search,
-                               Model model) {
-        model.addAttribute("products",
-                search != null && !search.isBlank()
-                        ? productService.searchAll(search)
-                        : productService.getAllProducts());
-        model.addAttribute("search", search);
-        return "admin/products";
-    }
-
-    @GetMapping("/product/add")
-    public String addProductForm() {
-        return "admin/add-product";
-    }
-
-    @PostMapping("/product/add")
-    public String addProduct(
-
-            @RequestParam String name,
-
-            @RequestParam double price,
-
-            @RequestParam int stock,
-
-            @RequestParam ProductCategory category,
-
-            @RequestParam(required = false)
-            MultipartFile imageFile,
-
-            RedirectAttributes redirectAttributes
-    ) {
-
-        String filename =
-                resolveImage(
-                        imageFile,
-                        null,
-                        redirectAttributes
-                );
-
-        if (filename == null) {
-
-            return "redirect:/admin/product/add";
-        }
-
-        productService.saveProduct(
-
-                name,
-
-                price,
-
-                stock,
-
-                category,
-
-                filename
-        );
-
+        // Add success message after successful deletion
         redirectAttributes.addFlashAttribute(
 
                 "success",
 
-                "Product added successfully!"
+                "User deleted successfully!"
         );
 
-        return "redirect:/admin/products";
     }
 
-    @GetMapping("/create-admin")
-    public String createAdminPage() {
+    catch (IllegalStateException e) {
 
-        return "admin/create-admin";
+        // Handle exceptions and show error message
+        redirectAttributes.addFlashAttribute(
+
+                "error",
+
+                e.getMessage()
+        );
     }
 
-    @GetMapping("/product/edit/{id}")
-    public String editProductForm(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.findById(id).orElseThrow());
-        return "admin/edit-product";
-    }
+    // Redirect back to admin users page
+    return "redirect:/admin/users";
+}
 
 
 
 
-    @PostMapping("/create-admin")
-    public String createAdmin(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String password,
-            RedirectAttributes ra
-    ) {
 
-        if (userService.existsByEmail(email)) {
+  
+@GetMapping("/products") // Handles request for viewing all products
+public String viewProducts(@RequestParam(required = false) String search,
+                           Model model) {
 
-            ra.addFlashAttribute(
-                    "error",
-                    "Email already exists."
+    // If search value exists, search products. Otherwise get all products.
+    model.addAttribute("products",
+            search != null && !search.isBlank()
+                    ? productService.searchAll(search)
+                    : productService.getAllProducts());
+
+    // Send search keyword back to frontend
+    model.addAttribute("search", search);
+
+    // Return products page
+    return "admin/products";
+}
+
+
+
+@GetMapping("/product/add") // Loads add product form page
+public String addProductForm() {
+
+    return "admin/add-product";
+}
+
+
+
+@PostMapping("/product/add") // Handles add product form submission
+public String addProduct(
+
+        @RequestParam String name, // Product name
+
+        @RequestParam double price, // Product price
+
+        @RequestParam int stock, // Product stock quantity
+
+        @RequestParam ProductCategory category, // Product category
+
+        @RequestParam(required = false)
+        MultipartFile imageFile, // Product image file
+
+        RedirectAttributes redirectAttributes // Used for success/error messages
+) {
+
+    // Upload image and get filename
+    String filename =
+            resolveImage(
+                    imageFile,
+                    null,
+                    redirectAttributes
             );
 
-            return "redirect:/admin/create-admin";
-        }
+    // If image upload fails, redirect back
+    if (filename == null) {
 
-        userService.createAdmin(
-                name,
-                email,
-                password
-        );
+        return "redirect:/admin/product/add";
+    }
 
+    // Save product details
+    productService.saveProduct(
+
+            name,
+
+            price,
+
+            stock,
+
+            category,
+
+            filename
+    );
+
+    // Show success message
+    redirectAttributes.addFlashAttribute(
+
+            "success",
+
+            "Product added successfully!"
+    );
+
+    // Redirect to products page
+    return "redirect:/admin/products";
+}
+
+
+
+@GetMapping("/create-admin") // Loads create admin page
+public String createAdminPage() {
+
+    return "admin/create-admin";
+}
+
+
+
+@GetMapping("/product/edit/{id}") // Loads edit product form page
+public String editProductForm(@PathVariable int id, Model model) {
+
+    // Find product by ID and send to frontend
+    model.addAttribute("product", productService.findById(id).orElseThrow());
+
+    // Return edit product page
+    return "admin/edit-product";
+}
+
+
+
+
+
+
+    
+@PostMapping("/create-admin") // Handles admin creation form submission
+public String createAdmin(
+        @RequestParam String name, // Get admin name from form
+        @RequestParam String email, // Get admin email from form
+        @RequestParam String password, // Get admin password from form
+        RedirectAttributes ra // Used for success/error messages
+) {
+
+    // Check whether email already exists
+    if (userService.existsByEmail(email)) {
+
+        // Show error message if email is already used
         ra.addFlashAttribute(
-                "success",
-                "Admin created successfully!"
+                "error",
+                "Email already exists."
         );
 
+        // Redirect back to create admin page
         return "redirect:/admin/create-admin";
     }
 
+    // Create new admin account
+    userService.createAdmin(
+            name,
+            email,
+            password
+    );
+
+    // Show success message
+    ra.addFlashAttribute(
+            "success",
+            "Admin created successfully!"
+    );
+
+    // Redirect back to create admin page
+    return "redirect:/admin/create-admin";
+}
 
 
-    @PostMapping("/product/edit/{id}")
-    public String editProduct(@PathVariable int id,
-                              @RequestParam String name,
-                              @RequestParam double price,
-                              @RequestParam int stock,
-                              @RequestParam(required = false) MultipartFile imageFile,
-                              RedirectAttributes redirectAttributes) {
-        Product existing = productService.findById(id).orElseThrow();
-        String filename = resolveImage(imageFile, existing.getImage(), redirectAttributes);
-        if (filename == null) {
-            return "redirect:/admin/product/edit/" + id;
-        }
 
-        productService.updateProduct(id, name, price, stock, filename);
-        redirectAttributes.addFlashAttribute("success", "Product updated successfully!");
-        return "redirect:/admin/products";
+@PostMapping("/product/edit/{id}") // Handles product update request
+public String editProduct(@PathVariable int id,
+                          @RequestParam String name,
+                          @RequestParam double price,
+                          @RequestParam int stock,
+                          @RequestParam(required = false) MultipartFile imageFile,
+                          RedirectAttributes redirectAttributes) {
+
+    // Find existing product by ID
+    Product existing = productService.findById(id).orElseThrow();
+
+    // Handle image upload and get image filename
+    String filename = resolveImage(imageFile, existing.getImage(), redirectAttributes);
+
+    // If image upload fails, redirect back to edit page
+    if (filename == null) {
+        return "redirect:/admin/product/edit/" + id;
     }
 
-    @GetMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable int id,
-                                RedirectAttributes redirectAttributes) {
-        productService.deleteProduct(id);
-        redirectAttributes.addFlashAttribute("success", "Product deleted successfully!");
-        return "redirect:/admin/products";
-    }
+    // Update product details
+    productService.updateProduct(id, name, price, stock, filename);
+
+    // Show success message
+    redirectAttributes.addFlashAttribute("success", "Product updated successfully!");
+
+    // Redirect to products page
+    return "redirect:/admin/products";
+}
+
+
+
+@GetMapping("/product/delete/{id}") // Handles product deletion request
+public String deleteProduct(@PathVariable int id,
+                            RedirectAttributes redirectAttributes) {
+
+    // Delete product using ID
+    productService.deleteProduct(id);
+
+    // Show success message
+    redirectAttributes.addFlashAttribute("success", "Product deleted successfully!");
+
+    // Redirect to products page
+    return "redirect:/admin/products";
+}
+
+
 
     @GetMapping("/orders")
     public String viewOrders(Model model) {
