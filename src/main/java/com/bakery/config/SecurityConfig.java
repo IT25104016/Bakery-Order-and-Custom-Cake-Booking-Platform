@@ -15,8 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;//Used to configure 
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
-
+    private final CustomUserDetailsService userDetailsService;// Service object used for user authentication details
     public SecurityConfig(
             CustomUserDetailsService userDetailsService
     ) {
