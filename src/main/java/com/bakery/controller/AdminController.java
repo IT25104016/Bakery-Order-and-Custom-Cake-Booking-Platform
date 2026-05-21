@@ -57,6 +57,45 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    @GetMapping("/profile")
+    public String profilePage(@AuthenticationPrincipal UserDetails userDetails,
+                              Model model) {
+        User user = getCurrentAdmin(userDetails);
+        model.addAttribute("user", user);
+        model.addAttribute("currentUser", user.getName());
+        return "admin/profile";
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(@AuthenticationPrincipal UserDetails userDetails,
+                                @RequestParam String name,
+                                @RequestParam(required = false) String newPassword,
+                                @RequestParam(required = false) MultipartFile profilePicFile,
+                                RedirectAttributes redirectAttributes) {
+        User user = getCurrentAdmin(userDetails);
+
+        userService.updateProfile(user.getId(), name, newPassword);
+
+        if (profilePicFile != null && !profilePicFile.isEmpty()) {
+            try {
+                userService.updateProfilePic(user.getId(), profilePicFile);
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute(
+                        "error",
+                        "Profile pic upload failed: " + e.getMessage()
+                );
+                return "redirect:/admin/profile";
+            }
+        }
+
+        redirectAttributes.addFlashAttribute(
+                "success",
+                "Profile updated successfully!"
+        );
+
+        return "redirect:/admin/profile";
+    }
+
     @GetMapping("/users")
     public String viewUsers(@AuthenticationPrincipal UserDetails userDetails,
                             Model model) {
