@@ -27,14 +27,14 @@ public class ProductRating {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
+ // STAR RATING=================
     @Column(nullable = false)
     private int stars; // 1–5
-
+// REVIEW TEXT=================
     @Column(length = 300)
-    private String review;
-
+    private String review;  // Optional comment/review
+  // CREATED TIME===================
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;  // Cannot be updated after creation
 }
